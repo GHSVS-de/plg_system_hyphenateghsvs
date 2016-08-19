@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.4.8" type="plugin" group="system" method="upgrade">
+ <name>PLG_SYSTEM_HYPHENATEGHSVS</name>
+ <author>G@HService Berlin Neukölln, Volkmar Volli Schlothauer</author>
+ <creationDate>2016-02-28</creationDate>
+ <copyright>Copyright (C) 2016, G@HService Berlin Neukölln, Volkmar Volli Schlothauer. All rights reserved.</copyright>
+ <license>GNU General Public License version 3 or later; see LICENSE.txt; see also LICENSE_Hyphenator.txt</license>
+ <authorEmail>hyphenateghsvs @ ghsvs.de</authorEmail>
+ <authorUrl>http://www.ghsvs.de</authorUrl>
+ <version>2016.08.16</version>
+ <versionHistory>
+2016.02.28:
+- First version.
+- Based upon Hyphenator 5.1.0 - client side hyphenation for webbrowsers, https://github.com/mnater/Hyphenator
+- neue.aurikulomedizin.eu
+- Only German embedded.
+- No CSS3 fallback.
+- No Hyphenator_Loader
+- JQuery based AJAX loading of Hyphenator.js.
+2016.07.20;
+- koerperundraum-berlin.de
+- de, en
+- CSS3 fallback.
+- Hyphenator_Loader.
+- KEIN JQuery based AJAX loading of Hyphenator.js.
+- Ziel: Alle Browser, die CSS-hyphens verstehen, können ausschließlich via CSS und media-queries gesteuert werden.
+Alle Browser, die das nicht verstehen (z.B. Chrome) haben immer Hyphens via JavaScript.
+- Mir ist noch keine Lösung eingefallen JS-Hyphens dieses Plugins responsiv zu steuern. Ist hyphenate.js mal geladen, reagiert es auch nicht auf zurückgenommene CSS-Klasen hyphenate oder hinzugefügte donthyphenate.
+- relaunchbs3.ghsvs.de.
+2016.08.05:
+- Option Activate for robots.
+- Code cleaning hyphenateghsvs.php.
+- Load (only!) Hyphenator_Loader.js via JHtml script (Template overrides possible).
+- Option Load Uncompressed.
+- Only EN and DE are prepared in hyphenateghsvs.php for CSS-hyphen detection!
+2016.08.08:
+- Hyphenator 5.2.0(devel).
+2016.08.16:
+- Add vanilla JS option.
+</versionHistory>
+ <description>PLG_SYSTEM_HYPHENATEGHSVS_XML_DESCRIPTION</description>
+ <!--<updateservers><server type="extension" priority="1" name="PLG_SYSTEM_HYPHENATEGHSVS">http://snapshots.ghsvs.de/updates/joomla/plg_system_hyphenateghsvs.xml</server></updateservers>-->
+ <files>
+  <filename plugin="hyphenateghsvs">hyphenateghsvs.php</filename>
+  <filename>helper.php</filename>
+  <filename>LICENSE.txt</filename>
+  <filename>LICENSE_Hyphenator.txt</filename>
+  <folder>language</folder>
+  <folder>media</folder>
+		<folder>myforms</folder>
+ </files>
+
+ <media folder="media" destination="plg_system_hyphenateghsvs">
+  <folder>js</folder>
+ </media>
+
+ <config>
+  <fields name="params" addfieldpath="plugins/system/hyphenateghsvs/fields">
+
+   <fieldset name="basic">
+    <field type="hidden" default="1" name="hyphenateghsvsplugin" />
+				<field type="spacer" name="spacerHyphenate" label="PLG_SYSTEM_HYPHENATEGHSVS_SPACERHYPHENATE" />
+
+				<field type="textarea" default="" name="hyphenate"
+				 label="PLG_SYSTEM_HYPHENATEGHSVS_HYPHENATE"
+					description="PLG_SYSTEM_HYPHENATEGHSVS_HYPHENATE_DESC" />
+				
+				<field type="textarea" default="" name="donthyphenate"
+				 label="PLG_SYSTEM_HYPHENATEGHSVS_DONTHYPHENATE"
+					description="PLG_SYSTEM_HYPHENATEGHSVS_DONTHYPHENATE_DESC" />
+
+    <field name="robots" type="list" default="0"
+     label="PLG_HYPHENATEGHSVS_ROBOTS"
+     description="PLG_HYPHENATEGHSVS_ROBOTS_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+    </field>
+
+    <field name="vanilla" type="list" default="0"
+     label="PLG_HYPHENATEGHSVS_VANILLA"
+     description="PLG_HYPHENATEGHSVS_VANILLA_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+    </field>
+
+    <field name="uncompressed" type="list" default=""
+     label="PLG_HYPHENATEGHSVS_UNCOMPRESSED"
+     description="PLG_HYPHENATEGHSVS_UNCOMPRESSED_DESC">
+					<option value="">JNO</option>
+					<option value="-uncompressed">JYES</option>
+    </field>
+   </fieldset>
+
+			<fieldset name="languages"
+			 label="PLG_HYPHENATEGHSVS_LANGUAGES"
+				description="">
+<field name="languagesspacer" type="spacer" label="PLG_HYPHENATEGHSVS_LANGUAGES_DESC" />
+    <field name="languages" type="subform" min="1" max="100" multiple="true"
+     formsource="plugins/system/hyphenateghsvs/myforms/languages-subform.xml" 
+     layout="joomla.form.field.subform.repeatable-table" groupByFieldset="false"
+     label="" description=""
+					default='{"languages0":{"lang":"de","langtext":"Silbentrennungsalgorithmus","active":"1"},"languages1":{"lang":"en-gb","langtext":"hyphenationalgorithm","active":"0"},"languages2":{"lang":"fr","langtext":"Amortissements","active":"0"},"languages3":{"lang":"hy","langtext":"\u0540\u0561\u0575\u0565\u0580\u0565\u0576\u0576","active":"0"}}'
+					/>
+
+			</fieldset>
+   <fieldset name="thanks" label="Thank you!">
+   
+    <field type="spacer" name="spacerthanks" label="PLG_HYPHENATEGHSVS_SPACERTHANKS" />
+
+
+   </fieldset>
+  </fields>
+ </config>
+</extension>
