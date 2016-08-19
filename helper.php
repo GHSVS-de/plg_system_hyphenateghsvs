@@ -3,7 +3,7 @@ defined('JPATH_BASE') or die;
 
 class PlgHyphenateGhsvsHelper
 {
- public static function prepareSelectors($string)
+	public static function prepareSelectors($string)
 	{
 		if (!$string) return '';
 		
