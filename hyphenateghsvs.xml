@@ -47,6 +47,7 @@ Alle Browser, die das nicht verstehen (z.B. Chrome) haben immer Hyphens via Java
 		<filename>helper.php</filename>
 		<filename>LICENSE.txt</filename>
 		<filename>LICENSE_Hyphenator.txt</filename>
+		<filename>README.md</filename>
 		<folder>language</folder>
 		<folder>media</folder>
 		<folder>myforms</folder>
