@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="3.4.8" type="plugin" group="system" method="upgrade">
- <name>PLG_SYSTEM_HYPHENATEGHSVS</name>
- <author>G@HService Berlin Neukölln, Volkmar Volli Schlothauer</author>
- <creationDate>2016-02-28</creationDate>
- <copyright>Copyright (C) 2016, G@HService Berlin Neukölln, Volkmar Volli Schlothauer. All rights reserved.</copyright>
- <license>GNU General Public License version 3 or later; see LICENSE.txt; see also LICENSE_Hyphenator.txt</license>
- <authorEmail>hyphenateghsvs @ ghsvs.de</authorEmail>
- <authorUrl>http://www.ghsvs.de</authorUrl>
- <version>2016.08.16</version>
- <versionHistory>
+<extension version="3.6" type="plugin" group="system" method="upgrade">
+	<name>PLG_SYSTEM_HYPHENATEGHSVS</name>
+	<author>G@HService Berlin Neukölln, Volkmar Volli Schlothauer</author>
+	<creationDate>2016-02-28</creationDate>
+	<copyright>Copyright (C) 2016, G@HService Berlin Neukölln, Volkmar Volli Schlothauer. All rights reserved.</copyright>
+	<license>GNU General Public License version 3 or later; see LICENSE.txt; see also LICENSE_Hyphenator.txt</license>
+	<authorEmail>hyphenateghsvs @ ghsvs.de</authorEmail>
+	<authorUrl>http://www.ghsvs.de</authorUrl>
+	<version>2016.08.16</version>
+	<versionHistory>
 2016.02.28:
 - First version.
 - Based upon Hyphenator 5.1.0 - client side hyphenation for webbrowsers, https://github.com/mnater/Hyphenator
@@ -36,79 +36,75 @@ Alle Browser, die das nicht verstehen (z.B. Chrome) haben immer Hyphens via Java
 2016.08.08:
 - Hyphenator 5.2.0(devel).
 2016.08.16:
-- Add vanilla JS option.
-</versionHistory>
- <description>PLG_SYSTEM_HYPHENATEGHSVS_XML_DESCRIPTION</description>
- <!--<updateservers><server type="extension" priority="1" name="PLG_SYSTEM_HYPHENATEGHSVS">http://snapshots.ghsvs.de/updates/joomla/plg_system_hyphenateghsvs.xml</server></updateservers>-->
- <files>
-  <filename plugin="hyphenateghsvs">hyphenateghsvs.php</filename>
-  <filename>helper.php</filename>
-  <filename>LICENSE.txt</filename>
-  <filename>LICENSE_Hyphenator.txt</filename>
-  <folder>language</folder>
-  <folder>media</folder>
+- Add vanilla JS option and script.
+- Add all languages as Hyphenator_Loader configuration options based upon /patterns/.
+- Remove defaultLanguage.
+	</versionHistory>
+	<description>PLG_SYSTEM_HYPHENATEGHSVS_XML_DESCRIPTION</description>
+	<updateservers><server type="extension" priority="1" name="PLG_SYSTEM_HYPHENATEGHSVS">http://snapshots.ghsvs.de/updates/joomla/plg_system_hyphenateghsvs.xml</server></updateservers>
+	<files>
+		<filename plugin="hyphenateghsvs">hyphenateghsvs.php</filename>
+		<filename>helper.php</filename>
+		<filename>LICENSE.txt</filename>
+		<filename>LICENSE_Hyphenator.txt</filename>
+		<folder>language</folder>
+		<folder>media</folder>
 		<folder>myforms</folder>
- </files>
+	</files>
+	<media folder="media" destination="plg_system_hyphenateghsvs">
+		<folder>js</folder>
+	</media>
+	<config>
+		<fields name="params" addfieldpath="plugins/system/hyphenateghsvs/fields">
+			<fieldset name="basic">
+				<field type="hidden" default="1" name="hyphenateghsvsplugin" />
 
- <media folder="media" destination="plg_system_hyphenateghsvs">
-  <folder>js</folder>
- </media>
-
- <config>
-  <fields name="params" addfieldpath="plugins/system/hyphenateghsvs/fields">
-
-   <fieldset name="basic">
-    <field type="hidden" default="1" name="hyphenateghsvsplugin" />
 				<field type="spacer" name="spacerHyphenate" label="PLG_SYSTEM_HYPHENATEGHSVS_SPACERHYPHENATE" />
-
+	
 				<field type="textarea" default="" name="hyphenate"
-				 label="PLG_SYSTEM_HYPHENATEGHSVS_HYPHENATE"
+					label="PLG_SYSTEM_HYPHENATEGHSVS_HYPHENATE"
 					description="PLG_SYSTEM_HYPHENATEGHSVS_HYPHENATE_DESC" />
-				
+
 				<field type="textarea" default="" name="donthyphenate"
-				 label="PLG_SYSTEM_HYPHENATEGHSVS_DONTHYPHENATE"
+					label="PLG_SYSTEM_HYPHENATEGHSVS_DONTHYPHENATE"
 					description="PLG_SYSTEM_HYPHENATEGHSVS_DONTHYPHENATE_DESC" />
 
-    <field name="robots" type="list" default="0"
-     label="PLG_HYPHENATEGHSVS_ROBOTS"
-     description="PLG_HYPHENATEGHSVS_ROBOTS_DESC">
+				<field name="robots" type="list" default="0"
+					label="PLG_HYPHENATEGHSVS_ROBOTS"
+					description="PLG_HYPHENATEGHSVS_ROBOTS_DESC">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
-    </field>
+				</field>
 
-    <field name="vanilla" type="list" default="0"
-     label="PLG_HYPHENATEGHSVS_VANILLA"
-     description="PLG_HYPHENATEGHSVS_VANILLA_DESC">
+				<field name="vanilla" type="list" default="0"
+					label="PLG_HYPHENATEGHSVS_VANILLA"
+					description="PLG_HYPHENATEGHSVS_VANILLA_DESC">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
-    </field>
+				</field>
 
-    <field name="uncompressed" type="list" default=""
-     label="PLG_HYPHENATEGHSVS_UNCOMPRESSED"
-     description="PLG_HYPHENATEGHSVS_UNCOMPRESSED_DESC">
+				<field name="uncompressed" type="list" default=""
+					label="PLG_HYPHENATEGHSVS_UNCOMPRESSED"
+					description="PLG_HYPHENATEGHSVS_UNCOMPRESSED_DESC">
 					<option value="">JNO</option>
 					<option value="-uncompressed">JYES</option>
-    </field>
-   </fieldset>
+				</field>
+			</fieldset><!--/basic-->
 
-			<fieldset name="languages"
-			 label="PLG_HYPHENATEGHSVS_LANGUAGES"
-				description="">
-<field name="languagesspacer" type="spacer" label="PLG_HYPHENATEGHSVS_LANGUAGES_DESC" />
-    <field name="languages" type="subform" min="1" max="100" multiple="true"
-     formsource="plugins/system/hyphenateghsvs/myforms/languages-subform.xml" 
-     layout="joomla.form.field.subform.repeatable-table" groupByFieldset="false"
-     label="" description=""
+			<fieldset name="languages" label="PLG_HYPHENATEGHSVS_LANGUAGES" description="">
+				<field name="languagesspacer" type="spacer" label="PLG_HYPHENATEGHSVS_LANGUAGES_DESC" />
+
+				<field name="languages" type="subform" min="1" max="100" multiple="true"
+					label="" description=""
+					formsource="plugins/system/hyphenateghsvs/myforms/languages-subform.xml"
+					layout="joomla.form.field.subform.repeatable-table" groupByFieldset="false"
 					default='{"languages0":{"lang":"de","langtext":"Silbentrennungsalgorithmus","active":"1"},"languages1":{"lang":"en-gb","langtext":"hyphenationalgorithm","active":"0"},"languages2":{"lang":"fr","langtext":"Amortissements","active":"0"},"languages3":{"lang":"hy","langtext":"\u0540\u0561\u0575\u0565\u0580\u0565\u0576\u0576","active":"0"}}'
-					/>
+				/>
+			</fieldset><!--/languages-->
 
-			</fieldset>
-   <fieldset name="thanks" label="Thank you!">
-   
-    <field type="spacer" name="spacerthanks" label="PLG_HYPHENATEGHSVS_SPACERTHANKS" />
-
-
-   </fieldset>
-  </fields>
- </config>
+			<fieldset name="thanks" label="Thank you!">
+				<field type="spacer" name="spacerthanks" label="PLG_HYPHENATEGHSVS_SPACERTHANKS" />
+			</fieldset><!--/thanks-->
+		</fields>
+	</config>
 </extension>
