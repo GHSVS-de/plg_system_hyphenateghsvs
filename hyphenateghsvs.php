@@ -6,7 +6,7 @@
  * @copyright Copyright (C) 2016, G@HService Berlin Neukölln, Volkmar Volli Schlothauer. All rights reserved.
  * @license For plugin: See License.txt. For Hyphenator.js: See LICENSE_Hyphenator.txt.
  * @authorUrl http://www.ghsvs.de
- * @authorEmail hyphenateghsvs @ ghsvs.de
+ * @authorEmail hyphenate @ ghsvs.de
  * @link https://github.com/GHSVS-de/plg_system_hyphenateghsvs
  * @link ghsvs.de/programmierer-schnipsel/joomla/191-joomla-silbentrennungs-plugin-hyphenateghsvs-fuer-doofe-browser
  */
