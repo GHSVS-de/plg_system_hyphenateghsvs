@@ -4,7 +4,7 @@
  * @version See hyphenateghsvs.xml
  * @author G@HService Berlin Neukölln, Volkmar Volli Schlothauer
  * @copyright Copyright (C) 2016, G@HService Berlin Neukölln, Volkmar Volli Schlothauer. All rights reserved.
- * @license For plugin: See License.txt. For Hyphenator.js: See LICENSE_Hyphenator.txt.
+ * @license GNU General Public License version 3 or later; see LICENSE.txt; see also LICENSE_Hyphenator.txt
  * @authorUrl http://www.ghsvs.de
  * @authorEmail hyphenate @ ghsvs.de
  * @link https://github.com/GHSVS-de/plg_system_hyphenateghsvs
