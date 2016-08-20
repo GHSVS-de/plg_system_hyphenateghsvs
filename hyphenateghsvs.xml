@@ -58,7 +58,7 @@ Alle Browser, die das nicht verstehen (z.B. Chrome) haben immer Hyphens via Java
 		<folder>js</folder>
 	</media>
 	<config>
-		<fields name="params" addfieldpath="plugins/system/hyphenateghsvs/fields">
+		<fields name="params">
 			<fieldset name="basic">
 				<field type="hidden" default="1" name="hyphenateghsvsplugin" />
 
