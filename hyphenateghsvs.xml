@@ -7,7 +7,7 @@
 	<license>GNU General Public License version 3 or later; see LICENSE.txt; see also LICENSE_Hyphenator.txt</license>
 	<authorEmail>hyphenate @ ghsvs.de</authorEmail>
 	<authorUrl>http://www.ghsvs.de</authorUrl>
-	<version>2016.08.20</version>
+	<version>2016.09.26</version>
 	<versionHistory>
 2016.02.28:
 - First version.
@@ -41,6 +41,8 @@ Alle Browser, die das nicht verstehen (z.B. Chrome) haben immer Hyphens via Java
 - Remove defaultLanguage.
 2016.08.20:
 - Add correct doc comments @license for JED.
+Since 2016.09.26:
+- versionHistory: See https://github.com/GHSVS-de/plg_system_hyphenateghsvs/wiki/Version-history-plg_system_hyphenateghsvs
 	</versionHistory>
 	<description>PLG_SYSTEM_HYPHENATEGHSVS_XML_DESCRIPTION</description>
 	<updateservers><server type="extension" priority="1" name="PLG_SYSTEM_HYPHENATEGHSVS">http://snapshots.ghsvs.de/updates/joomla/plg_system_hyphenateghsvs.xml</server></updateservers>
