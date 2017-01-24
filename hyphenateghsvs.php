@@ -22,25 +22,17 @@ defined('JPATH_BASE') or die;
 class PlgSystemhyphenateghsvs extends JPlugin
 {
 	protected $app;
-	protected $execute = 1;
 	protected static $basepath = 'plg_system_hyphenateghsvs';
-
-	function __construct(&$subject, $config = array())
-	{
-		parent::__construct($subject, $config);
-		if (
-			JFactory::getDocument()->getType() !== 'html'
-			|| $this->app->isAdmin()
-			|| (!$this->params->get('robots', 0) && $this->app->client->robot)
-		){
-			$this->execute = 0;
-			return;
-		}
-	}
 
 	public function onBeforeCompileHead()
 	{
-		if (!$this->execute) return;
+		if (
+			$this->app->isAdmin()
+			|| (!$this->params->get('robots', 0) && $this->app->client->robot)
+		 	|| JFactory::getDocument()->getType() !== 'html'
+		){
+			return;
+		}
 
 		JLoader::register('PlghyphenateghsvsHelper', __DIR__ . '/helper.php');
 		$hyphenate = PlghyphenateghsvsHelper::prepareSelectors($this->params->get('hyphenate', ''));
