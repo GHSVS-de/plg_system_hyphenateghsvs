@@ -112,7 +112,7 @@ class PlgSystemhyphenateghsvs extends JPlugin
 			$js[] = '});';
 
 			$file = self::$basepath . '/hyphenateghsvsVanilla' . $uncompressed . '.js';
-			$file = JHtml::_('script', $file, $mootools = false,
+			JHtml::_('script', $file, $mootools = false,
 				$relative = true, //Nur so Template-Override möglich! 
 				$path_only = false, $detect_browser = false, $detect_debug = false
 			);
