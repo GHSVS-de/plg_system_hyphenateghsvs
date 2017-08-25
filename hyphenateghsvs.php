@@ -112,18 +112,30 @@ class PlgSystemhyphenateghsvs extends JPlugin
 			$js[] = '});';
 
 			$file = self::$basepath . '/hyphenateghsvsVanilla' . $uncompressed . '.js';
-			JHtml::_('script', $file, $mootools = false,
-				$relative = true, //Nur so Template-Override möglich! 
-				$path_only = false, $detect_browser = false, $detect_debug = false
+			JHtml::_('script', // now 3.7.0 ready
+				$file,
+				array(
+					// 'framework' => false,
+					'relative' => true, //Nur so weitere Template-Overrides möglich!
+					// 'pathOnly' => false,
+					// 'detectBrowser' => false,
+					// 'detectDebug' => false,
+				)
 			);
 		}
 
 		$js = implode('', $js);
 
 		$file = self::$basepath . '/Hyphenator_Loader' . $uncompressed . '.js';
-		JHtml::_('script', $file, $mootools = false,
-			$relative = true, //Nur so Template-Override möglich! 
-			$path_only = false, $detect_browser = false, $detect_debug = false
+		JHtml::_('script',
+			$file,
+			array(
+				// 'framework' => false,
+				'relative' => true, //Nur so weitere Template-Overrides möglich!
+				// 'pathOnly' => false,
+				// 'detectBrowser' => false,
+				// 'detectDebug' => false,
+			)
 		);
 
 		// inclusive init for already loaded Hyphenator_Loader.js.
