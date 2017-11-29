@@ -8,6 +8,8 @@ See version history https://github.com/GHSVS-de/plg_system_hyphenateghsvs/wiki/V
 
 See German manual: https://www.ghsvs.de/programmierer-schnipsel/joomla/191-joomla-silbentrennungs-plugin-hyphenateghsvs-fuer-doofe-browser
 
+See short English description: https://extensions.joomla.org/extension/hyphenateghsvs/
+
 ## Don't forget to add:
 
 ### in your CSS file:
