@@ -1,5 +1,5 @@
-/** @license Hyphenator_Loader 5.2.0(devel) - client side hyphenation for webbrowsers
- *  Copyright (C) 2015  Mathias Nater, Zürich (mathiasnater at gmail dot com)
+/** @license Hyphenator_Loader 5.3.0 - client side hyphenation for webbrowsers
+ *  Copyright (C) 2017  Mathias Nater, Zürich (mathiasnater at gmail dot com)
  *  https://github.com/mnater/Hyphenator
  *
  *  Released under the MIT license
@@ -11,17 +11,16 @@
  * @description Checks if there's CSS-hyphenation available for the given languages and
  * loads and runs Hyphenator if there's no CSS-hyphenation
  * @author Mathias Nater, <a href = "mailto:mathias@mnn.ch">mathias@mnn.ch</a>
- * @version 5.2.0(devel)
+ * @version 5.3.0
  * @namespace Holds all methods and properties
  */
 
 /* The following comment is for JSLint: */
-/*jslint browser: true*/
+/*jslint browser: true multivar: true, single: true*/
 /*global window Hyphenator*/
 
 var Hyphenator_Loader = (function (window) {
     'use strict';
-				
     var languages,
         config,
         path,
@@ -113,7 +112,7 @@ var Hyphenator_Loader = (function (window) {
                     shadow.lang = lang;
                     shadow.appendChild(window.document.createTextNode(languages[lang]));
                     shadowContainer.appendChild(shadow);
-                    if (shadow.offsetHeight === 12) {
+                    if (shadow.offsetHeight <= 13) {
                         loadNrunHyphenator(config);
                         break;
                     }
@@ -139,4 +138,3 @@ var Hyphenator_Loader = (function (window) {
         }
     };
 }(window));
-
