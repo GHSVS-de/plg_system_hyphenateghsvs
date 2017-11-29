@@ -3,11 +3,11 @@
 	<name>PLG_SYSTEM_HYPHENATEGHSVS</name>
 	<author>G@HService Berlin Neukölln, Volkmar Volli Schlothauer</author>
 	<creationDate>2016-02-28</creationDate>
-	<copyright>Copyright (C) 2016, G@HService Berlin Neukölln, Volkmar Volli Schlothauer. All rights reserved.</copyright>
+	<copyright>Copyright (C) 2016 - 2017, G@HService Berlin Neukölln, Volkmar Volli Schlothauer. All rights reserved.</copyright>
 	<license>GNU General Public License version 3 or later; see LICENSE.txt; see also LICENSE_Hyphenator.txt</license>
 	<authorEmail>hyphenate @ ghsvs.de</authorEmail>
 	<authorUrl>http://www.ghsvs.de</authorUrl>
-	<version>2017.01.25</version>
+	<version>2017.11.29</version>
 	<versionHistory>
 2016.02.28:
 - First version.
