@@ -1,0 +1,22 @@
+/* CSS Document */
+.withContentToggler button
+{
+	margin-bottom:5px;
+}
+.togglerContent
+{
+	border:1px solid black;
+	padding:10px 10px 5px 10px;
+}
+.longdesription
+{
+	margin-bottom:5px;
+}
+section#content
+{
+	padding-bottom:200px;
+}
+button.contentToggler
+{
+	margin-top:3px;
+}
