@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="3.6" type="plugin" group="system" method="upgrade">
+<extension version="3.9" type="plugin" group="system" method="upgrade">
 	<name>PLG_SYSTEM_HYPHENATEGHSVS</name>
 	<author>G@HService Berlin Neukölln, Volkmar Volli Schlothauer</author>
 	<creationDate>2016-02-28</creationDate>
-	<copyright>Copyright (C) 2016 - 2017, G@HService Berlin Neukölln, Volkmar Volli Schlothauer. All rights reserved.</copyright>
+	<copyright>Copyright (C) 2016 - 2019, G@HService Berlin Neukölln, Volkmar Volli Schlothauer. All rights reserved.</copyright>
 	<license>GNU General Public License version 3 or later; see LICENSE.txt; see also LICENSE_Hyphenator.txt</license>
 	<authorEmail></authorEmail>
-	<authorUrl>http://www.ghsvs.de</authorUrl>
-	<version>2019.02.09-last-master-before-hyphenopoly</version>
+	<authorUrl>https://www.ghsvs.de</authorUrl>
+	<version>2019.02.10</version>
 	<versionHistory>
 2016.02.28:
 - First version.
@@ -43,6 +43,8 @@ Alle Browser, die das nicht verstehen (z.B. Chrome) haben immer Hyphens via Java
 - Add correct doc comments @license for JED.
 Since 2016.09.26:
 - versionHistory: See https://github.com/GHSVS-de/plg_system_hyphenateghsvs/wiki/Version-history-plg_system_hyphenateghsvs
+2019.02.10:
+- Add Hyphenopoly https://github.com/mnater/Hyphenopoly
 	</versionHistory>
 	<description>PLG_SYSTEM_HYPHENATEGHSVS_XML_DESCRIPTION</description>
 	<updateservers><server type="extension" priority="1" name="PLG_SYSTEM_HYPHENATEGHSVS">http://snapshots.ghsvs.de/updates/joomla/plg_system_hyphenateghsvs.xml</server></updateservers>
@@ -51,65 +53,213 @@ Since 2016.09.26:
 		<filename>helper.php</filename>
 		<filename>LICENSE.txt</filename>
 		<filename>LICENSE_Hyphenator.txt</filename>
-		<filename>README.md</filename>
+		<filename>LICENSE_Hyphenopoly.txt</filename>
+		<folder>fields</folder>
 		<folder>language</folder>
-		<folder>media</folder>
+		<folder>layouts</folder>
+		<!--<folder>media</folder>-->
 		<folder>myforms</folder>
 	</files>
 	<media folder="media" destination="plg_system_hyphenateghsvs">
+		<folder>css</folder>
 		<folder>js</folder>
+		<folder>images</folder>
 	</media>
 	<config>
-		<fields name="params">
+		<fields name="params" addfieldpath="plugins/system/hyphenateghsvs/fields">
+
 			<fieldset name="basic">
 				<field type="hidden" default="1" name="hyphenateghsvsplugin" />
+			</fieldset><!--/basic-->
 
-				<field type="spacer" name="spacerHyphenate" label="PLG_SYSTEM_HYPHENATEGHSVS_SPACERHYPHENATE" />
-	
-				<field type="textarea" default="" name="hyphenate"
+			<fieldset name="languages" label="PLG_HYPHENATEGHSVS_FIELDSET_LANGUAGES" description="">
+
+				<field name="modeNote" type="plgSystemHyphenateGhsvs.longdescription"
+					hidden="true"
+					additionalClass="mode"
+					descriptiontext="PLG_HYPHENATEGHSVS_MODE_DESC"
+					contentToggler="true" />
+
+				<field name="mode" type="radio" default="hyphenator"
+					class="switcher btn-group btn-group-yesno"
+					label="PLG_HYPHENATEGHSVS_MODE"
+					description="">
+						<option value="hyphenator">Hyphenator</option>
+						<option value="hyphenopoly">Hyphenopoly</option>
+				</field>
+
+				<field name="languagesspacer" type="plgSystemHyphenateGhsvs.longdescription"
+					descriptiontext="PLG_HYPHENATEGHSVS_LANGUAGES_DESC"
+					showon="mode:hyphenator"
+					hiddenLabel="true"
+					additionalClass="languages"
+					contentToggler="true" />
+
+				<field name="languages" type="plgSystemHyphenateGhsvs.subformlayout" min="1" max="100" multiple="true"
+					showon="mode:hyphenator"
+					label="" description=""
+					hiddenLabel="true"
+					formsource="plugins/system/hyphenateghsvs/myforms/languages-subform.xml"
+					layout="joomla.form.field.subform.repeatable-table" groupByFieldset="false"
+					default='{"languages0":{"lang":"de","langtext":"Silbentrennungsalgorithmus","active":"1"},"languages1":{"lang":"en-gb","langtext":"hyphenationalgorithm","active":"0"},"languages2":{"lang":"fr","langtext":"Amortissements","active":"0"},"languages3":{"lang":"hy","langtext":"\u0540\u0561\u0575\u0565\u0580\u0565\u0576\u0576","active":"0"},"languages4":{"lang":"en-us","langtext":"supercalifragilisticexpialidocious","active":"0"}}'
+				/>
+
+				<field name="languagesspacerHyphenopoly" type="plgSystemHyphenateGhsvs.longdescription"
+					descriptiontext="PLG_HYPHENATEGHSVS_LANGUAGES_HYPHENOPOLY_DESC"
+					showon="mode:hyphenopoly"
+					hiddenLabel="true"
+					additionalClass="languages"
+					contentToggler="true" />
+
+				<field name="languageshyphenopoly" type="plgSystemHyphenateGhsvs.subformlayout" min="1" max="100" multiple="true"
+					showon="mode:hyphenopoly"
+					label="" description=""
+					hiddenLabel="true"
+					formsource="plugins/system/hyphenateghsvs/myforms/languages-subform-hyphenopoly.xml"
+					layout="joomla.form.field.subform.repeatable-table" groupByFieldset="false"
+					default='{"languageshyphenopoly0":{"lang":"de","langTag":"de-at","langtext":"Silbentrennungsalgorithmus","active":"0"},"languageshyphenopoly1":{"lang":"de","langTag":"de-de","langtext":"Silbentrennungsalgorithmus","active":"0"},"languageshyphenopoly2":{"lang":"en-gb","langTag":"","langtext":"hyphenationalgorithm","active":"0"},"languageshyphenopoly3":{"lang":"en-gb","langTag":"en","langtext":"hyphenationalgorithm","active":"0"},"languageshyphenopoly4":{"lang":"en-us","langTag":"","langtext":"supercalifragilisticexpialidocious","active":"0"},"languageshyphenopoly5":{"lang":"en-us","langTag":"en-au","langtext":"supercalifragilisticexpialidocious","active":"0"},"languageshyphenopoly6":{"lang":"fr","langTag":"fr-fr","langtext":"Amortissements","active":"0"},"languageshyphenopoly7":{"lang":"fr","langTag":"fr-ca","langtext":"Amortissements","active":"0"},"languageshyphenopoly8":{"lang":"la","langTag":"","langtext":"comprovincialis","active":"0"},"languageshyphenopoly9":{"lang":"hy","langTag":"","langtext":"\u0540\u0561\u0575\u0565\u0580\u0565\u0576\u0576","active":"0"}}'
+				/>
+
+			</fieldset><!--/languages-->
+
+			<fieldset name="hypenateSelectors" label="PLG_HYPHENATEGHSVS_FIELDSET_SELECTORS" description="">
+
+				<field name="hyphenateNote" type="plgSystemHyphenateGhsvs.longdescription"
+					hiddenLabel="true"
+					additionalClass="hyphenate"
+					descriptiontext="PLG_SYSTEM_HYPHENATEGHSVS_HYPHENATE_DESC"
+					contentToggler="true" />
+
+				<field name="hyphenate" type="textarea" default=""
 					label="PLG_SYSTEM_HYPHENATEGHSVS_HYPHENATE"
-					description="PLG_SYSTEM_HYPHENATEGHSVS_HYPHENATE_DESC" />
+					description="" />
+
+				<field name="donthyphenateNote" type="plgSystemHyphenateGhsvs.longdescription"
+					hiddenLabel="true"
+					additionalClass="donthyphenate"
+					descriptiontext="PLG_SYSTEM_HYPHENATEGHSVS_DONTHYPHENATE_DESC"
+					contentToggler="true" />
 
 				<field type="textarea" default="" name="donthyphenate"
-					label="PLG_SYSTEM_HYPHENATEGHSVS_DONTHYPHENATE"
-					description="PLG_SYSTEM_HYPHENATEGHSVS_DONTHYPHENATE_DESC" />
+					description="" />
+			</fieldset><!--/hypenateSelectors-->
 
-				<field name="robots" type="list" default="0"
+			<fieldset name="hypenateCss" label="PLG_HYPHENATEGHSVS_FIELDSET_CSS" description="">
+
+				<field name="add_hypenate_cssNote" type="plgSystemHyphenateGhsvs.longdescription"
+					hiddenLabel="true"
+					additionalClass="add_hypenate_css"
+					descriptiontext="PLG_HYPHENATEGHSVS_ADD_HYPENATE_CSS_DESC"
+					contentToggler="true" />
+
+				<field name="add_hypenate_css" type="radio" default="0"
+					class="switcher btn-group btn-group-yesno"
+					label="PLG_HYPHENATEGHSVS_ADD_HYPENATE_CSS"
+					description=""
+					filter="integer">
+						<option value="0">JNO</option>
+						<option value="1">JYES</option>
+				</field>
+
+				<field name="robotsNote" type="plgSystemHyphenateGhsvs.longdescription"
+					hiddenLabel="true"
+					label="Not available with setting Mode=Hyphenator."
+					descriptiontext="PLG_HYPHENATEGHSVS_ROBOTS_DESC" />
+
+				<field name="robots" type="radio" default="0"
 					label="PLG_HYPHENATEGHSVS_ROBOTS"
-					description="PLG_HYPHENATEGHSVS_ROBOTS_DESC">
+					description="" class="switcher btn-group btn-group-yesno">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
 
-				<field name="vanilla" type="list" default="0"
+				<field name="vanillaNote" type="plgSystemHyphenateGhsvs.longdescription"
+					hiddenLabel="true"
+					descriptiontext="PLG_HYPHENATEGHSVS_VANILLA_DESC" />
+
+				<field name="vanilla" type="radio" default="0"
 					label="PLG_HYPHENATEGHSVS_VANILLA"
-					description="PLG_HYPHENATEGHSVS_VANILLA_DESC">
+					description="" class="switcher btn-group btn-group-yesno">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
 
-				<field name="uncompressed" type="list" default=""
+				<field name="uncompressedNote" type="plgSystemHyphenateGhsvs.longdescription"
+					hiddenLabel="true"
+					descriptiontext="PLG_HYPHENATEGHSVS_UNCOMPRESSED_DESC" />
+
+				<field name="uncompressed" type="radio" default=""
 					label="PLG_HYPHENATEGHSVS_UNCOMPRESSED"
-					description="PLG_HYPHENATEGHSVS_UNCOMPRESSED_DESC">
+					description="" class="switcher btn-group btn-group-yesno">
 					<option value="">JNO</option>
 					<option value="-uncompressed">JYES</option>
 				</field>
-			</fieldset><!--/basic-->
+			</fieldset>
 
-			<fieldset name="languages" label="PLG_HYPHENATEGHSVS_LANGUAGES" description="">
-				<field name="languagesspacer" type="spacer" label="PLG_HYPHENATEGHSVS_LANGUAGES_DESC" />
+			<fieldset name="debug" label="PLG_HYPHENATEGHSVS_FIELDSET_DEBUG_AND_LOG">
 
-				<field name="languages" type="subform" min="1" max="100" multiple="true"
-					label="" description=""
-					formsource="plugins/system/hyphenateghsvs/myforms/languages-subform.xml"
-					layout="joomla.form.field.subform.repeatable-table" groupByFieldset="false"
-					default='{"languages0":{"lang":"de","langtext":"Silbentrennungsalgorithmus","active":"1"},"languages1":{"lang":"en-gb","langtext":"hyphenationalgorithm","active":"0"},"languages2":{"lang":"fr","langtext":"Amortissements","active":"0"},"languages3":{"lang":"hy","langtext":"\u0540\u0561\u0575\u0565\u0580\u0565\u0576\u0576","active":"0"}}'
-				/>
-			</fieldset><!--/languages-->
+				<field name="debugNote" type="spacer"
+					label="Not available with setting Mode=Hyphenator."
+					description=""
+					showon="mode:hyphenator"/>
 
-			<fieldset name="thanks" label="Thank you!">
-				<field type="spacer" name="spacerthanks" label="PLG_HYPHENATEGHSVS_SPACERTHANKS" />
+				<field name="cleanupNote" type="plgSystemHyphenateGhsvs.longdescription"
+					hiddenLabel="true"
+					additionalClass="cleanup"
+					descriptiontext="PLG_HYPHENATEGHSVS_CLEANUP_DESC"
+					contentToggler="true" showon="mode:hyphenopoly" />
+
+				<field name="cleanup" type="list" default="0"
+					label="PLG_HYPHENATEGHSVS_CLEANUP"
+					description=""
+					filter="integer" showon="mode:hyphenopoly">
+						<option value="0">JNO</option>
+						<option value="1">JYES</option>
+						<option value="2">FORCE</option>
+				</field>
+
+				<field name="silenterrorsNote" type="plgSystemHyphenateGhsvs.longdescription"
+					hiddenLabel="true"
+					additionalClass="silenterrors"
+					descriptiontext="PLG_HYPHENATEGHSVS_SILENTERRORS_DESC"
+					contentToggler="true" showon="mode:hyphenopoly" />
+
+				<field name="silenterrors" type="radio" default="0"
+					class="switcher btn-group btn-group-yesno"
+					label="PLG_HYPHENATEGHSVS_SILENTERRORS"
+					description=""
+					filter="integer" showon="mode:hyphenopoly">
+						<option value="0">JNO</option>
+						<option value="1">JYES</option>
+				</field>
+
+				<field name="logNote" type="plgSystemHyphenateGhsvs.longdescription"
+					hiddenLabel="true"
+					additionalClass="log"
+					descriptiontext="PLG_HYPHENATEGHSVS_LOG_DESC"
+					contentToggler="true" showon="mode:hyphenopoly" />
+
+				<field name="log" type="radio" default="0"
+					label="PLG_HYPHENATEGHSVS_LOG"
+					class="switcher btn-group btn-group-yesno"
+					description=""
+					filter="integer" showon="mode:hyphenopoly">
+						<option value="0">JNO</option>
+						<option value="1">JYES</option>
+				</field>
+				
+				<!--Contains Button "Delete Log File"-->
+				<field name="assetsbe" type="plgSystemHyphenateGhsvs.assetsbe" hidden="true"
+					loadjs="true" loadcss="true" />
+			</fieldset><!--/debug-->
+
+			<fieldset name="thanks" label="PLG_HYPHENATEGHSVS_FIELDSET_TANKS_AND_LICENSES">
+				<field name="spacerthanks" type="plgSystemHyphenateGhsvs.longdescription"
+					descriptiontext="PLG_HYPHENATEGHSVS_SPACERTHANKS"
+					hidden="true"
+					additionalClass="thanks" />
 			</fieldset><!--/thanks-->
+
 		</fields>
 	</config>
 </extension>

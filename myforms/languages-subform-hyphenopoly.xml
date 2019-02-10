@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
-	<field name="lang" type="filelist" directory="media/plg_system_hyphenateghsvs/js/patterns/"
-		stripext="1" hide_default="1" filter="\.js$" multiple="false"
-		label="PLG_SYSTEM_HYPHENATEGHSVS_LANG"
+	<field name="lang" type="filelist" directory="media/plg_system_hyphenateghsvs/js/hyphenopoly/patterns/"
+		stripext="1" hide_default="1" filter="\.hpb$" multiple="false" hide_none="true"
+		label="PLG_SYSTEM_HYPHENATEGHSVS_LANGUAGES_HYPHENOPOLY"
+		description="" />
+
+	<field name="langTag" type="text"
+		filter="cmd"
+		label="PLG_SYSTEM_HYPHENATEGHSVS_HYPHENOPOLY_LANG_TAG"
 		description="" />
 
 	<field name="langtext" type="text" default="" filter="string"
