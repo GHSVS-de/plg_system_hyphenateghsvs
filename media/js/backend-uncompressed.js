@@ -1,4 +1,4 @@
-// Content toggler for form field "longdescription.php".
+// Ajax for field assetsbe.
 (function ($) {
 	$(document).ready(function () {
 		var ajaxData = {
