@@ -1,0 +1,18 @@
+<p>Whenever Hyphenopoly finds</p>
+<ol>
+	<li>a <code>lang</code> tag inside the page HTML that is not configured (= needed language pattern not loaded)</li>
+	<li>a configured language that is not needed in the page (= unneccessary language pattern loaded)</li>
+</ol>
+<p>it throws an unproblematic informatory error/warning/info inside the console of your browser. Guests of your page won't see them and Hyphonopoly will not stop working but perhaps doesn't hyphenate correctly.</p>
+<p>E.g. messages like</p>
+<ol>
+	<li><i>Element with 'en-gb' found, but 'en-gb.hpb' not loaded. Check language tags!</i></li>
+	<li><i>engine for language 'fr' loaded, but no elements found.</i></li>
+</ol>
+<p><img src="../../../../../media/plg_system_hyphenateghsvs/images/hyphenopoly_console-errors.jpg" alt="" /></p>
+<p><b>That can be very helpful to debug your plugin configuration.</b></p>
+<p>Messages of type 1. tell you that you haven't configured a needed language for a <code>lang</code> tag <code>en-GB</code>. Solution: Configure it correctly in the plugin.</p>
+<p> Messages of type 2. will occur nearly on every Joomla page if you run a multilingual site even if  you have configured the plugin correctly for all languages. It's clear that a german page doesn't contain english elements marked with a <code>lang=en-gb</code> in most cases.</p>
+<p>If you don't need/want these messages in the browser console set <code>NO</code> here.</p>
+<p>See also related setting <code>Cleanup</code>.</p>
+<p>See also related setting <code>Log</code>.</p>
