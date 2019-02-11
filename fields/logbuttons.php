@@ -11,10 +11,14 @@ defined('JPATH_PLATFORM') or die;
 
 use Joomla\CMS\Form\FormField;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Layout\FileLayout;
 
 class plgSystemHyphenateGhsvsFormFieldLogButtons extends FormField
 {
 	protected $type = 'logbuttons';
+	
+	protected $renderLayout = 'ghsvs.renderfield';
+	protected $myLayoutPath = 'plugins/system/hyphenateghsvs/layouts';
 
 	protected function getInput()
 	{
@@ -40,9 +44,16 @@ class plgSystemHyphenateGhsvsFormFieldLogButtons extends FormField
 			<div><button class=deletefile>Delete Log File</button></div>
 		</div>';
 	}
-	
-	protected function getLabel()
+	public function getLayoutPaths()
 	{
-		return '';
+		$customPaths = array(JPATH_SITE . '/' . $this->myLayoutPath);
+
+		$defaultPaths = new FileLayout('');
+		$defaultPaths = $defaultPaths->getDefaultIncludePaths();
+
+		$parentFieldPaths = parent::getLayoutPaths();
+
+		return array_merge($customPaths, $defaultPaths, $parentFieldPaths);
 	}
+	
 }
