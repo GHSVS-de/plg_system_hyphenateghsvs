@@ -55,13 +55,7 @@ class plgSystemHyphenateGhsvsFormFieldAssetsBe extends FormField
 				)
 			);
 		}
-		return '
-		<div id=deletelogFile>
-			<div><button class=showfilepath>Show Log File Path and Size</button><br><br></div>
-			<div><button class=showfile>Show Log File Content</button><br><br></div>
-			<div class=logfilecontent></div>
-			<div><button class=deletefile>Delete Log File</button></div>
-		</div>';
+		return '';
 	}
 	
 	protected function getLabel()
