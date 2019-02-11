@@ -254,8 +254,10 @@ Since 2016.09.26:
 				</field>
 				
 				<!--Contains Button "Delete Log File"-->
-				<field name="assetsbe" type="plgSystemHyphenateGhsvs.assetsbe" hidden="true"
-					loadjs="true" loadcss="true" />
+				<field name="logbuttons" type="plgSystemHyphenateGhsvs.logbuttons"
+					hidden="true" hiddenLabel="true"
+					showon="mode:hyphenopoly"/>
+
 			</fieldset><!--/debug-->
 
 			<fieldset name="thanks" label="PLG_HYPHENATEGHSVS_FIELDSET_TANKS_AND_LICENSES">
@@ -263,6 +265,9 @@ Since 2016.09.26:
 					descriptiontext="PLG_HYPHENATEGHSVS_SPACERTHANKS"
 					hidden="true"
 					additionalClass="thanks" />
+
+				<field name="assetsbe" type="plgSystemHyphenateGhsvs.assetsbe" hidden="true"
+					loadjs="false" loadcss="true" />
 			</fieldset><!--/thanks-->
 
 		</fields>
