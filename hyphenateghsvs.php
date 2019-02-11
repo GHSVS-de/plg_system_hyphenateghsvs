@@ -433,7 +433,6 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 		{
 			$this->prettyPrint = ($this->params->get('prettyPrint', 0) || JDEBUG) ? JSON_PRETTY_PRINT : 0;
 		}
-		
 
 		return $this->execute;
 	}
@@ -441,9 +440,9 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 	protected function getHyphenopolyInit()
 	{
 		$Hyphenoply = array('require' => $this->require);
-		
+
 		$dos = array('fallbacks', 'paths', 'handleEvent');
-		
+
 		foreach ($dos as $do)
 		{
 			if ($this->$do)
