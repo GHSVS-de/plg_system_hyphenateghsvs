@@ -55,6 +55,7 @@ Since 2016.09.26:
 	<files>
 		<filename plugin="hyphenateghsvs">hyphenateghsvs.php</filename>
 		<filename>helper.php</filename>
+		<filename>installerScript.php</filename>
 		<filename>LICENSE.txt</filename>
 		<filename>LICENSE_Hyphenator.txt</filename>
 		<filename>LICENSE_Hyphenopoly.txt</filename>
