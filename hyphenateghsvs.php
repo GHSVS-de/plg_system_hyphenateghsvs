@@ -219,8 +219,13 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 				$this->handleEvent['error'] = '||||function (e) {e.preventDefault();}||||';
 			}
 
-			$this->paths['patterndir'] = Uri::root(true) . '/media/' . self::$basepath . '/js/hyphenopoly/patterns/';
-			$this->paths['maindir'] = Uri::root(true) . '/media/' . self::$basepath . '/js/hyphenopoly/' . $this->uncompressed . '/';
+			$this->paths['patterndir'] = 
+				Uri::root(true) . '/media/' . self::$basepath . '/js/hyphenopoly/patterns/';
+			$this->paths['maindir'] = 
+				Path::clean(
+					Uri::root(true) . '/media/' . self::$basepath . '/js/hyphenopoly/' . $this->uncompressed . '/',
+					'/'
+				);
 
 			if (!$this->cleanup)
 			{
