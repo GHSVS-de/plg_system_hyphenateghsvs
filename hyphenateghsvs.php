@@ -51,6 +51,7 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 	protected $logFile = null;
 	protected $cleanup = null;
 	protected $cleanupMarker = '<meta name=!hyphenopolyInit! content=!INITHYPHENOPOLYHERE!>';
+	protected $prettyPrint = null;
 	
 	// Subforms with fields to clean by filter="something" when saving.
 	private $usedSubforms = array(
@@ -108,14 +109,14 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 				// Leave $this->require untouched.
 				elseif ($this->cleanup === 1)
 				{
-					$replaceWith  = '<script>' . $this->getHyphenopolyInit(true) . '</script>';
+					$replaceWith  = '<script>' . $this->getHyphenopolyInit() . '</script>';
 					$replaceWith .= '<script src="' . $this->getHyphenopolyLink() . '"></script>';
 				}
 			}
 			else
 			{
 				$this->require = $required;
-				$replaceWith  = '<script>' . $this->getHyphenopolyInit(true) . '</script>';
+				$replaceWith  = '<script>' . $this->getHyphenopolyInit() . '</script>';
 				$replaceWith .= '<script src="' . $this->getHyphenopolyLink() . '"></script>';
 			}
 			
@@ -229,7 +230,7 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 
 			if (!$this->cleanup)
 			{
-				$hyphenopolyInit = $this->getHyphenopolyInit(true);
+				$hyphenopolyInit = $this->getHyphenopolyInit();
 				$doc->addCustomTag('<script src="' . $this->getHyphenopolyLink() . '"></script>');
 			}
 			else
@@ -426,12 +427,18 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 		if (is_null($this->uncompressed) || $refresh === true)
 		{
 			$this->uncompressed = $this->params->get('uncompressed', '');
-		}		
+		}
+
+		if (is_null($this->prettyPrint) || $refresh === true)
+		{
+			$this->prettyPrint = ($this->params->get('prettyPrint', 0) || JDEBUG) ? JSON_PRETTY_PRINT : 0;
+		}
+		
 
 		return $this->execute;
 	}
 
-	protected function getHyphenopolyInit($pretty = false)
+	protected function getHyphenopolyInit()
 	{
 		$Hyphenoply = array('require' => $this->require);
 		
@@ -446,7 +453,7 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 		}
 
 		$Hyphenoply = json_encode($Hyphenoply,
-			($pretty ? JSON_PRETTY_PRINT : 0) 
+			$this->prettyPrint 
 			+ JSON_UNESCAPED_SLASHES
 			+ JSON_UNESCAPED_UNICODE
 		);
