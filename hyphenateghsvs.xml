@@ -252,11 +252,11 @@ Since 2016.09.26:
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
 				</field>
-				
+
 				<!--Contains Button "Delete Log File"-->
 				<field name="logbuttons" type="plgSystemHyphenateGhsvs.logbuttons"
-					hidden="true" hiddenLabel="true"
-					showon="mode:hyphenopoly"/>
+					hiddenLabel="true"
+					showon="mode:hyphenopoly" />
 
 			</fieldset><!--/debug-->
 
