@@ -48,6 +48,10 @@ Since 2016.09.26:
 	</versionHistory>
 	<description>PLG_SYSTEM_HYPHENATEGHSVS_XML_DESCRIPTION</description>
 	<updateservers><server type="extension" priority="1" name="PLG_SYSTEM_HYPHENATEGHSVS">http://snapshots.ghsvs.de/updates/joomla/plg_system_hyphenateghsvs.xml</server></updateservers>
+	<scriptfile>installerScript.php</scriptfile>
+	<minimumPhp>7.0.0</minimumPhp>
+	<minimumJoomla>3.9.0</minimumJoomla>
+	<maximumJoomla>3.9.99999</maximumJoomla>
 	<files>
 		<filename plugin="hyphenateghsvs">hyphenateghsvs.php</filename>
 		<filename>helper.php</filename>
