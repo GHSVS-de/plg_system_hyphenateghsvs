@@ -1,6 +1,6 @@
-<p>The CSS selectors that you enter in this field will stop the hyphenatation. They get the <code>class=&quot;donthyphenate&quot;</code>. Thus the content of the marked HTML element <b style="color:red">and it's child elements</b> will not be hyphenated. The markup is the same like in a CSS file. You can enter HTML tags or classes (with a leading dot) or ids (with a leading #) or combinations. See the description of setting <code>Hyphenate-Selectors</code> for details.</p>
+<p>The CSS selectors that you enter in this field will stop the hyphenatation. They get the class &quot;donthyphenate&quot;. Thus the content of the marked HTML element and it's child elements will not be hyphenated. The markup is the same like in a CSS file. See the description of setting &quot;Hyphenate-Selectors&quot; for details.</p>
 
-<p style=\"color:red\"><b>Be aware:</b> You can't cancel <code>donthyphenate</code> by a <code>hyphenate</code> class in a child element <b>if Hyphenopoly/Hyphenator scripts are controlling the hyphenation</b>. That means that the element <code>P</code> will not be hyphenated in the following code snippet because the surrounding <code>div</code> has a <code>class=donthyphenate</code>.</p>
+<p style=\"color:red\"><b>Be aware:</b> You can't cancel a class &quot;donthyphenate&quot; by a class &quot;hyphenate&quot; in a child element <b>if the hyphenation scripts are controlling the hyphenation</b>. That means that the element &quot;P&quot; will not be hyphenated in the following code snippet because the surrounding &quot;div&quot; has a class &quot;donthyphenate&quot;.</p>
 <pre>
 &lt;div class="someDiv <b>donthyphenate</b>"&gt;
 	&lt;p class="someP <b>hyphenate</b>"&gt;
@@ -9,4 +9,4 @@
 &lt;/div&gt;
 </pre>
 
-<p style="color:red;font-size:1.2em">If you leave this field empty and field <code>Hyphenate-Selectors</code> is empty, too, the plugin will NOT load the Hyphenopoly/Hyphenator scripts.</p>
+<p style="color:red;font-size:1.2em">If you leave this field empty and field &quot;Hyphenate-Selectors&quot; is empty, too, the plugin will NOT load the hyphenation scripts. See also description of &quot;Hyphenate-Selectors&quot;.</p>
