@@ -77,6 +77,64 @@ Since 2016.09.26:
 				<field type="hidden" default="1" name="hyphenateghsvsplugin" />
 			</fieldset><!--/basic-->
 
+			<fieldset name="thanks" label="PLG_HYPHENATEGHSVS_FIELDSET_TANKS_AND_LICENSES">
+				<field name="spacerthanks" type="plgSystemHyphenateGhsvs.longdescription"
+					descriptiontext="PLG_HYPHENATEGHSVS_SPACERTHANKS"
+					hidden="true"
+					additionalClass="thanks" />
+
+				<field name="assetsbe" type="plgSystemHyphenateGhsvs.assetsbe" hidden="true"
+					loadjs="false" loadcss="true" />
+			</fieldset><!--/thanks-->
+
+			<fieldset name="long_descriptiom" label="PLG_HYPHENATEGHSVS_FIELDSET_LONG_DESCRIPTION">
+				<field name="long_descriptiomNote" type="plgSystemHyphenateGhsvs.longdescription"
+					descriptiontext="{INCLUDE-FILE:Long-Description.html:}"
+					hidden="true"
+					additionalClass="long_descriptiom" />
+
+				<field name="assetsbe" type="plgSystemHyphenateGhsvs.assetsbe" hidden="true"
+					loadjs="false" loadcss="true" />
+			</fieldset><!--/thanks-->
+
+			<fieldset name="hypenateSelectors" label="PLG_HYPHENATEGHSVS_FIELDSET_SELECTORS" description="">
+
+				<field name="hyphenateNote" type="plgSystemHyphenateGhsvs.longdescription"
+					hiddenLabel="true"
+					additionalClass="hyphenate"
+					descriptiontext="PLG_SYSTEM_HYPHENATEGHSVS_HYPHENATE_DESC"
+					contentToggler="true" />
+
+				<field name="hyphenate" type="textarea" default=""
+					label="PLG_SYSTEM_HYPHENATEGHSVS_HYPHENATE"
+					description="" />
+
+				<field name="donthyphenateNote" type="plgSystemHyphenateGhsvs.longdescription"
+					hiddenLabel="true"
+					additionalClass="donthyphenate"
+					descriptiontext="PLG_SYSTEM_HYPHENATEGHSVS_DONTHYPHENATE_DESC"
+					contentToggler="true" />
+
+				<field name="donthyphenate" type="textarea" default=""
+					label="PLG_SYSTEM_HYPHENATEGHSVS_DONTHYPHENATE"
+					description="" />
+
+				<field name="add_hypenate_cssNote" type="plgSystemHyphenateGhsvs.longdescription"
+					hiddenLabel="true"
+					additionalClass="add_hypenate_css"
+					descriptiontext="PLG_HYPHENATEGHSVS_ADD_HYPENATE_CSS_DESC"
+					contentToggler="true" />
+
+				<field name="add_hypenate_css" type="radio" default="0"
+					class="switcher btn-group btn-group-yesno"
+					label="PLG_HYPHENATEGHSVS_ADD_HYPENATE_CSS"
+					description=""
+					filter="integer">
+						<option value="0">JNO</option>
+						<option value="1">JYES</option>
+				</field>
+			</fieldset><!--/hypenateSelectors-->
+
 			<fieldset name="languages" label="PLG_HYPHENATEGHSVS_FIELDSET_LANGUAGES" description="">
 
 				<field name="modeNote" type="plgSystemHyphenateGhsvs.longdescription"
@@ -127,44 +185,7 @@ Since 2016.09.26:
 
 			</fieldset><!--/languages-->
 
-			<fieldset name="hypenateSelectors" label="PLG_HYPHENATEGHSVS_FIELDSET_SELECTORS" description="">
-
-				<field name="hyphenateNote" type="plgSystemHyphenateGhsvs.longdescription"
-					hiddenLabel="true"
-					additionalClass="hyphenate"
-					descriptiontext="PLG_SYSTEM_HYPHENATEGHSVS_HYPHENATE_DESC"
-					contentToggler="true" />
-
-				<field name="hyphenate" type="textarea" default=""
-					label="PLG_SYSTEM_HYPHENATEGHSVS_HYPHENATE"
-					description="" />
-
-				<field name="donthyphenateNote" type="plgSystemHyphenateGhsvs.longdescription"
-					hiddenLabel="true"
-					additionalClass="donthyphenate"
-					descriptiontext="PLG_SYSTEM_HYPHENATEGHSVS_DONTHYPHENATE_DESC"
-					contentToggler="true" />
-
-				<field type="textarea" default="" name="donthyphenate"
-					description="" />
-			</fieldset><!--/hypenateSelectors-->
-
 			<fieldset name="hypenateCss" label="PLG_HYPHENATEGHSVS_FIELDSET_CSS" description="">
-
-				<field name="add_hypenate_cssNote" type="plgSystemHyphenateGhsvs.longdescription"
-					hiddenLabel="true"
-					additionalClass="add_hypenate_css"
-					descriptiontext="PLG_HYPHENATEGHSVS_ADD_HYPENATE_CSS_DESC"
-					contentToggler="true" />
-
-				<field name="add_hypenate_css" type="radio" default="0"
-					class="switcher btn-group btn-group-yesno"
-					label="PLG_HYPHENATEGHSVS_ADD_HYPENATE_CSS"
-					description=""
-					filter="integer">
-						<option value="0">JNO</option>
-						<option value="1">JYES</option>
-				</field>
 
 				<field name="robotsNote" type="plgSystemHyphenateGhsvs.longdescription"
 					hiddenLabel="true"
@@ -193,10 +214,10 @@ Since 2016.09.26:
 					hiddenLabel="true"
 					descriptiontext="PLG_HYPHENATEGHSVS_UNCOMPRESSED_DESC" />
 
-				<field name="uncompressed" type="radio" default=""
+				<field name="uncompressed" type="radio" default="0"
 					label="PLG_HYPHENATEGHSVS_UNCOMPRESSED"
 					description="" class="switcher btn-group btn-group-yesno">
-					<option value="">JNO</option>
+					<option value="0">JNO</option>
 					<option value="-uncompressed">JYES</option>
 				</field>
 			</fieldset>
@@ -259,16 +280,6 @@ Since 2016.09.26:
 					showon="mode:hyphenopoly" />
 
 			</fieldset><!--/debug-->
-
-			<fieldset name="thanks" label="PLG_HYPHENATEGHSVS_FIELDSET_TANKS_AND_LICENSES">
-				<field name="spacerthanks" type="plgSystemHyphenateGhsvs.longdescription"
-					descriptiontext="PLG_HYPHENATEGHSVS_SPACERTHANKS"
-					hidden="true"
-					additionalClass="thanks" />
-
-				<field name="assetsbe" type="plgSystemHyphenateGhsvs.assetsbe" hidden="true"
-					loadjs="false" loadcss="true" />
-			</fieldset><!--/thanks-->
 
 		</fields>
 	</config>
