@@ -1,4 +1,3 @@
-/* CSS Document */
 .withContentToggler button
 {
 	margin-bottom:5px;
@@ -19,4 +18,8 @@ section#content
 button.contentToggler
 {
 	margin-top:3px;
+}
+.borderedImg
+{
+	border:2px solid gray;
 }
