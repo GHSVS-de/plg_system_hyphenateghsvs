@@ -1,9 +1,6 @@
 # plg_system_hyphenateghsvs
 
-## The current master branch uses already Hyphenopoly.js!
-- Tested with Joomla 3.9.3
-- Tested with PHP 7.2
-- Uses Hyphenopoly JavaScript library from https://github.com/mnater/Hyphenopoly provided by Mathias Nater (mnater).
+## The current pre-release 2019.02.10 uses already Hyphenopoly.js!
 
 ## Old description but still valid for the Hyphenator.js part of this plugin
 Joomla-Plugin. Hyphenation for browsers that do NOT support CSS property hyphens (e.g. Chrome) or do not support languages you selected in this plugin.
