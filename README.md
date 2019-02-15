@@ -1,6 +1,7 @@
 # plg_system_hyphenateghsvs
 
 ## The current pre-release 2019.02.10 uses already Hyphenopoly.js!
+https://github.com/GHSVS-de/plg_system_hyphenateghsvs/releases/tag/2019.02.10
 
 ## Old description but still valid for the Hyphenator.js part of this plugin
 Joomla-Plugin. Hyphenation for browsers that do NOT support CSS property hyphens (e.g. Chrome) or do not support languages you selected in this plugin.
