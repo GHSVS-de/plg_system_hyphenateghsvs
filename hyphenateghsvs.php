@@ -165,9 +165,10 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 
 		if ($this->params->get('add_hypenate_css', 0))
 		{
-			$doc->addStyleDeclaration(str_replace(array("\n", "\t"), '', file_get_contents(
-				JPATH_SITE . '/media/' . self::$basepath . '/css/hyphenate.css')
-			));
+			$add_hypenate_css = file_get_contents(
+				JPATH_SITE . '/media/' . self::$basepath . '/css/hyphenate.min.css'
+			);
+			$doc->addCustomTag('<style>' . $add_hypenate_css . '</style>');
 		}
 
 		JLoader::register('PlghyphenateghsvsHelper', __DIR__ . '/helper.php');
