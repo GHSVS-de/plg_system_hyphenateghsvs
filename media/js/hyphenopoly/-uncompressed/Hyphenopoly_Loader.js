@@ -1,6 +1,6 @@
 /**
- * @license Hyphenopoly_Loader 2.7.1-devel - client side hyphenation
- * ©2018  Mathias Nater, Zürich (mathiasnater at gmail dot com)
+ * @license Hyphenopoly_Loader 2.8.0 - client side hyphenation
+ * ©2019 Mathias Nater, Zürich (mathiasnater at gmail dot com)
  * https://github.com/mnater/Hyphenopoly
  *
  * Released under the MIT license
@@ -400,17 +400,19 @@
                                 ));
                                 H.events.dispatch("engineLoaded", {"msg": m});
                             } else {
-                                loadedBins.get(f).
-                                    forEach(function eachHpb(rn) {
-                                        H.binaries.set(
-                                            rn,
-                                            response.clone().arrayBuffer()
-                                        );
-                                        H.events.dispatch(
-                                            "hpbLoaded",
-                                            {"msg": rn}
-                                        );
-                                    });
+                                const files = loadedBins.get(f);
+                                files.forEach(function eachHpb(rn) {
+                                    H.binaries.set(
+                                        rn,
+                                        (files.length > 1)
+                                            ? response.clone().arrayBuffer()
+                                            : response.arrayBuffer()
+                                    );
+                                    H.events.dispatch(
+                                        "hpbLoaded",
+                                        {"msg": rn}
+                                    );
+                                });
                             }
                         }
                     }
@@ -693,7 +695,7 @@
             } else {
                 scriptLoader(H.dfltPaths.maindir, "hyphenEngine.asm.js");
             }
-            Object.keys(H.clientFeat.langs).forEach(function prepareEach(lang) {
+            eachKey(H.clientFeat.langs, function prepareEach(lang) {
                 /* eslint-disable security/detect-object-injection */
                 if (H.clientFeat.langs[lang] === "H9Y") {
                     allocateMemory(lang);
