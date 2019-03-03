@@ -453,8 +453,8 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 
 		$Hyphenoply = json_encode($Hyphenoply,
 			$this->prettyPrint 
-			+ JSON_UNESCAPED_SLASHES
-			+ JSON_UNESCAPED_UNICODE
+			| JSON_UNESCAPED_SLASHES
+			| JSON_UNESCAPED_UNICODE
 		);
 		
 		// Remove quotes around handleEvent functions:
