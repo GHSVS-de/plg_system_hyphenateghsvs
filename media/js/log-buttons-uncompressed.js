@@ -1,46 +1,44 @@
-// Content toggler for form field "longdescription.php".
-(function ($) {
-	$(document).ready(function () {
-		var ajaxData = {
-			'option' : 'com_ajax',
-			'group'  : 'system',
-			'plugin' : 'logfiledummy',
-			'format' : 'raw'
-			};
-			buttoncontainer = $("#deletelogFile");
-			logfilecontent = $("#deletelogFile .logfilecontent");
-			// buttoncontainer.find(".logfilecontent");
+plg_system_hyphenateghsvs = window.plg_system_hyphenateghsvs || {};
 
-			buttoncontainer.on('click', '.deletefile', function(e)
-			{
-				ajaxData.plugin = "DeleteLogFile";
-				$.getJSON('index.php', ajaxData, function(response){
-					logfilecontent.html("<pre>" + response['deleted'] + "</pre>");
-				});
-				
-				e.preventDefault();
-			});
+(function (document, plg_system_hyphenateghsvs)
+{
+  'use strict';
 
-			buttoncontainer.on('click', '.showfile', function(e)
-			{
-				ajaxData.plugin = "ShowLogFile";
-				
-				$.getJSON('index.php', ajaxData, function(response){
-					logfilecontent.html("<pre>" + response['file'] + "</pre>");
-				});
-				
-				e.preventDefault();
-			});
+  var logButtonsEvents = function logButtonsEvents(callback)
+	{
+	  var logButtonsContainer = document.getElementById("logButtonsContainer");
+    var logButtonsOutput    = logButtonsContainer.querySelector(".ajaxOutput");
 
-			buttoncontainer.on('click', '.showfilepath', function(e)
+    logButtonsContainer.addEventListener("click", function (event)
+		{
+      if (event.target.classList.contains("deleteFile"))
 			{
-				ajaxData.plugin = "ShowLogFilePath";
-				
-				$.getJSON('index.php', ajaxData, function(response){
-					logfilecontent.html("<pre>" + response['filepath'] + response['filesize'] + "</pre>");
-				});
-				
-				e.preventDefault();
-			});
-	});
-})(jQuery);
+        event.preventDefault();
+				logButtonsOutput.innerHTML = "";
+        callback({
+          plugin: "PlgSystemHyphenateGhsvsDeleteLogFile",
+					ajaxOutput: logButtonsOutput
+        });
+      }
+			else if (event.target.classList.contains('showFilePath'))
+			{
+        event.preventDefault();
+				logButtonsOutput.innerHTML = '';
+        callback({
+          plugin: 'PlgSystemHyphenateGhsvsShowLogFilePath',
+					ajaxOutput: logButtonsOutput
+        });
+      }
+			else if (event.target.classList.contains('showFile'))
+			{
+        event.preventDefault();
+				logButtonsOutput.innerHTML = '';
+        callback({
+          plugin: 'PlgSystemHyphenateGhsvsShowLogFile',
+					ajaxOutput: logButtonsOutput
+        });
+      }
+    });
+  };
+	logButtonsEvents(plg_system_hyphenateghsvs.getJson);
+})(document, plg_system_hyphenateghsvs);
