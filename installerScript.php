@@ -18,7 +18,7 @@
  * <allowDowngrades>1</allowDowngrades>
  */
 defined('_JEXEC') or die;
-
+use Joomla\CMS\Factory;
 use Joomla\CMS\Installer\InstallerScript;
 
 class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
