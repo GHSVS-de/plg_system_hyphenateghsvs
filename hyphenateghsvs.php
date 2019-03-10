@@ -390,11 +390,17 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 
 	protected function goOn($refresh = false, $force = null)
 	{
+		if (is_null($this->isHyphenopoly) || $refresh === true)
+		{
+			$this->isHyphenopoly = $this->params->get('mode', 'hyphenator') === 'hyphenopoly';
+		}
+		
 		if (is_null($this->execute) || $refresh === true)
 		{
 			if (
 				!$this->app->isClient('site')
-				|| ($this->app->isClient('site') && !$this->params->get('frontendon', 0))
+				|| ($this->isHyphenopoly && $this->app->isClient('site')
+					&& !$this->params->get('frontendon', 0))
 				|| (!$this->params->get('robots', 0) && $this->app->client->robot)
 				|| $this->app->getDocument()->getType() !== 'html'
 			){
@@ -404,11 +410,6 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 			{
 				$this->execute = is_bool($force) ? $force : true;
 			}
-		}
-
-		if (is_null($this->isHyphenopoly) || $refresh === true)
-		{
-			$this->isHyphenopoly = $this->params->get('mode', 'hyphenator') === 'hyphenopoly';
 		}
 
 		if (is_null($this->log) || $refresh === true)
