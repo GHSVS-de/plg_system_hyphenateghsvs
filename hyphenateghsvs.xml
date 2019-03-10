@@ -7,7 +7,7 @@
 	<license>GNU General Public License version 3 or later; see LICENSE.txt; see also LICENSE_Hyphenator.txt</license>
 	<authorEmail></authorEmail>
 	<authorUrl>https://www.ghsvs.de</authorUrl>
-	<version>2019.02.10</version>
+	<version>2019.03.10</version>
 	<versionHistory>
 2016.02.28:
 - First version.
@@ -45,9 +45,14 @@ Since 2016.09.26:
 - versionHistory: See https://github.com/GHSVS-de/plg_system_hyphenateghsvs/wiki/Version-history-plg_system_hyphenateghsvs
 2019.02.10:
 - Add Hyphenopoly https://github.com/mnater/Hyphenopoly
+2019.03.10:
+- New stable release.
 	</versionHistory>
+
 	<description>PLG_SYSTEM_HYPHENATEGHSVS_XML_DESCRIPTION</description>
-	<updateservers><server type="extension" priority="1" name="PLG_SYSTEM_HYPHENATEGHSVS">http://snapshots.ghsvs.de/updates/joomla/plg_system_hyphenateghsvs.xml</server></updateservers>
+
+	<updateservers><server type="extension" priority="1" name="PLG_SYSTEM_HYPHENATEGHSVS">https://snapshots.ghsvs.de/updates/joomla/plg_system_hyphenateghsvs.xml</server></updateservers>
+
 	<scriptfile>installerScript.php</scriptfile>
 	<minimumPhp>7.0.0</minimumPhp>
 	<minimumJoomla>3.9.0</minimumJoomla>
@@ -77,6 +82,11 @@ Since 2016.09.26:
 
 			<fieldset name="basic">
 				<field type="hidden" default="1" name="hyphenateghsvsplugin" />
+
+				<field name="frontendonWarning" type="plgSystemHyphenateGhsvs.longdescription"
+					descriptiontext="PLG_SYSTEM_HYPHENATEGHSVS_FRONTENDON_WARNING"
+					hidden="true"
+					additionalClass="thanks" />
 			</fieldset><!--/basic-->
 
 			<fieldset name="thanks" label="PLG_HYPHENATEGHSVS_FIELDSET_TANKS_AND_LICENSES">
@@ -162,13 +172,15 @@ Since 2016.09.26:
 <!--FRONTENDON-->
 				<field name="frontendonNote" type="plgSystemHyphenateGhsvs.longdescription"
 					hiddenLabel="true"
-					descriptiontext="PLG_SYSTEM_HYPHENATEGHSVS_FRONTENDON_DESC"/>
-		
+					descriptiontext="PLG_SYSTEM_HYPHENATEGHSVS_FRONTENDON_DESC"
+					showon="mode:hyphenopoly"/>
+
 				<field name="frontendon" type="radio" default="0"
 					label="PLG_SYSTEM_HYPHENATEGHSVS_FRONTENDON"
 					class="switcher btn-group btn-group-yesno"
 					description=""
-					filter="integer">
+					filter="integer"
+					showon="mode:hyphenopoly">
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
 				</field>
