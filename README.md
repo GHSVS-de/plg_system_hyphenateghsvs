@@ -5,7 +5,7 @@ Joomla-Plugin. Intelligent Hyphenation for browsers that do NOT support CSS prop
 You can report issues, ask questions in english or german: https://github.com/GHSVS-de/plg_system_hyphenateghsvs/issues or via email (see https://ghsvs.de/kontakt)
 
 ## Description/Documentation
-You'll find detailed descriptions of all configuration options inside the plugin.
+You'll find detailed descriptions of all configuration options inside the plugin after installation.
 
 ## Uses since release 2019.03.10 recommended Hyphenopoly.js (besides old Hyphenater.js for updaters)!
 https://github.com/GHSVS-de/plg_system_hyphenateghsvs/releases/tag/2019.03.10
