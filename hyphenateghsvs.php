@@ -137,7 +137,7 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 					);
 					PlgHyphenateGhsvsHelper::log($this->logFile, $data);
 				}
-				
+
 				if (!$required)
 				{
 					$merged = array_unique(array_merge(array_keys($this->require), array_keys($this->fallbacks)));
@@ -174,7 +174,7 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 		JLoader::register('PlghyphenateghsvsHelper', __DIR__ . '/helper.php');
 		$hyphenate     = PlghyphenateghsvsHelper::prepareSelectors($this->params->get('hyphenate', ''));
 		$donthyphenate = PlghyphenateghsvsHelper::prepareSelectors($this->params->get('donthyphenate', ''));
-		
+
 		if (!$hyphenate && !$donthyphenate)
 		{
 			if ($this->log)
@@ -270,7 +270,7 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 				$file,
 				array('relative' => true, 'version' => 'auto')
 			);
-			
+
 			$js[] = ';document.addEventListener("DOMContentLoaded", function(){';
 			if ($hyphenate)
 			{
@@ -288,7 +288,7 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 		}
 		// inclusive init for already loaded Hyphenator_Loader.js.
 		$doc->addScriptDeclaration(implode('', $js));
-		
+
 		if (!$hasFound)
 		{
 			if ($this->log)
@@ -325,14 +325,14 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 				//'filelist'
 			);
 			$inputFilter = InputFilter::getInstance();
-			
+
 			foreach ($this->usedSubforms as $fieldName => $file)
 			{
 				$cleans = array();
 				$params = new Registry($table->params);
 				$subformData = $params->get($fieldName);
 				$file = __DIR__ . '/myforms/' . $file . '.xml';
-				
+
 				if (
 					empty($subformData) || !is_object($subformData)
 					|| !is_file($file) 
@@ -345,14 +345,14 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 				$subform->loadFile($file);
 				$xml = $subform->getXml();
 				$fieldsAsXMLArray = $xml->xpath('//field[@name=@name and not(ancestor::field/form/*)]');
-				
+
 				foreach ($fieldsAsXMLArray as $field)
 				{
 					if (in_array((string) $field->attributes()->type, $excludeTypes))
 					{
 						continue;
 					}
-					
+
 					if (!($filter = trim((string) $field->attributes()->filter)))
 					{
 						$filter = 'string';
@@ -360,7 +360,7 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 					
 					$cleans[(string) $field->attributes()->name] = $filter;
 				}
-				
+
 				foreach ($subformData as $key => $item)
 				{
 					foreach ($item as $property => $value)
@@ -394,6 +394,7 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 		{
 			if (
 				!$this->app->isClient('site')
+				|| ($this->app->isClient('site') && !$this->params->get('frontendon', 0))
 				|| (!$this->params->get('robots', 0) && $this->app->client->robot)
 				|| $this->app->getDocument()->getType() !== 'html'
 			){
@@ -404,7 +405,7 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 				$this->execute = is_bool($force) ? $force : true;
 			}
 		}
-		
+
 		if (is_null($this->isHyphenopoly) || $refresh === true)
 		{
 			$this->isHyphenopoly = $this->params->get('mode', 'hyphenator') === 'hyphenopoly';
@@ -470,16 +471,19 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 			'/'
 		);
 	}
-	
-	public function onAjaxDeleteLogFile()
+
+	/**
+	 * Delete the log file
+	*/
+	public function onAjaxPlgSystemHyphenateGhsvsDeleteLogFile()
 	{
-		if (!$this->isAllowedUser() || !$this->isAjaxRequest())
+		if (!$this->isAjaxAllowed())
 		{
 			throw new Exception(JText::_('JGLOBAL_AUTH_ACCESS_DENIED'), 403);
 		}
-		
+
 		$filePath = $this->getLogFile();
-		
+
 		if (is_file($filePath))
 		{
 			$deleted = @unlink($filePath);
@@ -488,70 +492,87 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 		{
 			$deleted = true;
 		}
+		$file = self::removeJPATH_SITE($filePath);
 
 		if (!$deleted)
 		{
-			$deleted = 'Error: Something went technically wrong. File not deleted (' . $filePath  . '). Check yourself if it exists.';
+			$html = Text::sprintf('PLG_SYSTEM_HYPHENATEGHSVS_BUTTON_FILE_DELETE_ERROR', $file);
 		}
 		else
 		{
-			$deleted = 'Success: File deleted (' . $filePath  . ').';
+			$html = Text::sprintf('PLG_SYSTEM_HYPHENATEGHSVS_BUTTON_FILE_DELETE_SUCCESS', $file);
 		}
-		echo json_encode(array('deleted' => $deleted));
+		echo json_encode(array('html' => $html));
 	}
-	
-	public function onAjaxShowLogFile()
+
+	/**
+	 * Display content of log file
+	*/
+	public function onAjaxPlgSystemHyphenateGhsvsShowLogFile()
 	{
-		if (!$this->isAllowedUser() || !$this->isAjaxRequest())
+		if (!$this->isAjaxAllowed())
 		{
 			throw new Exception(JText::_('JGLOBAL_AUTH_ACCESS_DENIED'), 403);
 		}
 
 		$filePath = $this->getLogFile();
-		$file = @file_get_contents($filePath);
+		$file     = @file_get_contents($filePath);
+		$filePath = self::removeJPATH_SITE($filePath);
 
 		if ($file === false || !trim($file))
 		{
-			$file = 'File empty or doesn\'t exist yet (' . $filePath . ').';
+			$html = Text::sprintf('PLG_SYSTEM_HYPHENATEGHSVS_BUTTON_FILE_SHOW_CONTENT_EMPTY', $filePath);;
 		}
 		else
 		{
-			$file = '** CONTENT OF FILE ' . $filePath . " **\n\n" . $file;
+			$html = '** CONTENT OF FILE ' . $filePath . " **\n\n" . $file;
 		}
-		
-		echo json_encode(array('file' => $file));
+		echo json_encode(array('html' => $html));
 	}
-	
-	public function onAjaxShowLogFilePath()
+
+	/**
+	 * Show path and size and download of log file
+	*/
+	public function onAjaxPlgSystemHyphenateGhsvsShowLogFilePath()
 	{
-		if (!$this->isAllowedUser() || !$this->isAjaxRequest())
+		if (!$this->isAjaxAllowed())
 		{
 			throw new Exception(JText::_('JGLOBAL_AUTH_ACCESS_DENIED'), 403);
 		}
-		
+
 		$filesize = 0;
-		
-		$filePath = $this->getLogFile();
-		if (is_file($filePath))
+		$file     = $this->getLogFile();
+
+		if (is_file($file))
 		{
-			$bytes = filesize($filePath);
+			$bytes    = filesize($file);
 			$filesize = HTMLHelper::_('number.bytes', $bytes);
 		}
-		echo json_encode(array('filepath' => 'Path: ' . $filePath, 'filesize' => "\nFilesize: " . $filesize));
-	}
+		$file = self::removeJPATH_SITE($file);
+		
+		if (isset($bytes))
+		{
+			$download = JUri::root() . '/' . ltrim($file, '/');
+			$download = '<a href=' . $download . ' target=_blank download>Download</a>';
+		}
+		echo json_encode(array('html' => 'Path: ' . $file . "\nSize: " . $filesize
+			. "\nDownload: " . (isset($download) ? $download : 'No file found')));
+	}	
 
-	private function isAjaxRequest()
+	private function isAjaxAllowed()
 	{
-		return strtolower($this->app->input->server->get('HTTP_X_REQUESTED_WITH', '')) === 'xmlhttprequest';
-	}
-
-	private function isAllowedUser()
-	{
-		return Factory::getUser()->authorise('core.admin');
+		return
+			(strtolower($this->app->input->server->get('HTTP_X_REQUESTED_WITH', '')) === 'xmlhttprequest')
+			&& Factory::getUser()->authorise('core.manage');
 	}
 
 	private function getLogFile()
 	{
-		return $this->app->get('log_path') . '/' . self::$basepath . '-log.csv';
+		return $this->app->get('log_path') . '/' . self::$basepath . '-log.txt';
+	}
+	
+	public static function removeJPATH_SITE($str)
+	{
+		return str_replace(JPATH_SITE, '', $str);
 	}
 }

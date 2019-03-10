@@ -10,7 +10,7 @@
 	<li>Enter a single and at least 12 characters long and polysyllabic word in column <code>Word</code> . For english it could be &quot;hyphenationalgorithm&quot;.</li>
 	<li>Don't forget to activate the language in column &quot;Active&quot;.</li>
 </ul>
-<p><b>Let's now configure German that needs a so called "fallback":</b></p>
+<p><b>Let's now configure German that needs a so called "fallback" configuration:</b></p>
 <ul>
 	<li>The lang attribute inside page HTML is &quot;de-de&quot; and, bad news, there is NO pattern de-de yet <span style="font-size:0.8em">(while I write this description in 2019)</span> in the dropdown list in column &quot;Language (Hyphenopoly)&quot;.</li>
 	<li> Try to find another similiar pattern and select it. I propose <code>de</code>.</li>
@@ -22,4 +22,4 @@
 <p><b>Keep in mind:</b></p>
 <p>Any here configured and activated language will be checked by Hyphenopoly. You should not activate unnecessary languages. Any unnecessary check eats up some performance of your site.</p>
 <p><b>Experts:</b></p>
-<p>The Word &quot;FORCEHYPHENOPOLY&quot; will force Hyphenopoly to load a language pattern even if the browser doesn't need it. Note: Disable CSS-hyphenation (&quot;hyphens&quot; rules) while using &quot;FORCEHYPHENOPOLY&quot; for testing purposes.</p>
+<p>The Word &quot;FORCEHYPHENOPOLY&quot; will force Hyphenopoly to load  language patterns even if a browser like FireFox doesn't need them. And Hyphenopoly will use its hyphenation scripts. Note: Disable CSS-hyphenation (&quot;hyphens&quot; rules) while using &quot;FORCEHYPHENOPOLY&quot; for testing purposes.</p>

@@ -1,3 +1,4 @@
+/* Die Einbindung erfolgt mit defer => true */
 .withContentToggler button
 {
 	margin-bottom:5px;
@@ -10,6 +11,8 @@
 .longdesription
 {
 	margin-bottom:5px;
+	padding-top:5px;
+	border-top:1px solid blue;
 }
 section#content
 {

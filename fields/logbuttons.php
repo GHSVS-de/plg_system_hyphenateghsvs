@@ -17,9 +17,12 @@ Inserts Ajax-Buttons for Log File.
 */
 defined('JPATH_PLATFORM') or die;
 
+use Joomla\CMS\Factory;
 use Joomla\CMS\Form\FormField;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\FileLayout;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Plugin\PluginHelper;
 
 class plgSystemHyphenateGhsvsFormFieldLogButtons extends FormField
 {
@@ -30,26 +33,59 @@ class plgSystemHyphenateGhsvsFormFieldLogButtons extends FormField
 
 	protected function getInput()
 	{
-	
-		$file = 'plg_system_hyphenateghsvs/log-buttons.js';
+		$offHint = '';
 
-		HTMLHelper::_('jquery.framework');
-		HTMLHelper::_('script',
-			$file,
-			array(
-				//Allow template overrides in css/plg_system_charactercounterghsvs:
-				'relative' => true,
-				//'pathOnly' => false,
-				//'detectBrowser' => false,
-				//'detectDebug' => true,
-			)
-		);
+		if (PluginHelper::isEnabled('system', 'hyphenateghsvs'))
+		{
+			HTMLHelper::_('behavior.core');
+			$files = array(
+				'buttons-ajax.js',
+				'log-buttons.js',
+			);
+			
+			foreach ($files as $file)
+			{
+				HTMLHelper::_('script',
+					'plg_system_hyphenateghsvs/' . $file,
+					array(
+						'relative' => true,
+						'version' => 'auto'
+					),
+					array(
+						'defer' => true
+					)
+				);
+			}
+
+			Factory::getDocument()->addScriptOptions(
+				'plg_system_hyphenateghsvs',
+				array(
+					'ajaxError' => Text::sprintf(
+						'PLG_SYSTEM_HYPHENATEGHSVS_AJAX_ERROR'),
+					'bePatient' => Text::sprintf(
+						'PLG_SYSTEM_HYPHENATEGHSVS_BE_PATIENT')
+					
+				)
+			);
+		}
+		else
+		{
+			$offHint = Text::_('PLG_SYSTEM_HYPHENATEGHSVS_BUTTONS_INACTIVE');
+			return $offHint;
+		}
+
 		return '
-		<div id=deletelogFile>
-			<div><button class=showfilepath>Show Log File Path and Size</button><br><br></div>
-			<div><button class=showfile>Show Log File Content</button><br><br></div>
-			<div class=logfilecontent></div>
-			<div><button class=deletefile>Delete Log File</button></div>
+		<div id=logButtonsContainer>
+			<div><button class=showFilePath>'
+			. Text::_('PLG_SYSTEM_HYPHENATEGHSVS_BUTTON_LOG_FILE_INFOS')
+			. '</button></div>
+			<div><br><button class=showFile>'
+			. Text::_('PLG_SYSTEM_HYPHENATEGHSVS_BUTTON_LOG_FILE_SHOW')
+			. '</button></div>
+			<div><br><button class=deleteFile>'
+			. Text::_('PLG_SYSTEM_HYPHENATEGHSVS_BUTTON_LOG_FILE_DELETE')
+			. '</button></div>
+			<div class=ajaxOutput></div>
 		</div>';
 	}
 	public function getLayoutPaths()

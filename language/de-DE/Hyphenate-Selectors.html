@@ -2,7 +2,8 @@
 
 <h5>Beispiel Tag <b><code>body</code></b></h5>
 <p><span title="">Der sichtbare Inhalt aller HTML-Elemente innerhalb der Seite wird getrennt, da der übergeordnete &lt;body&gt; -Tag eine Klasse &quot;hyphenate&quot; (&lt;body class=&quot;hyphenate&quot;&gt;) erhält und alle untergeordneten Elemente eines so markierten Elements das Verhalten erben.</span> <span title="">Normalerweise müssen Sie dann viele der untergeordneten Elemente mit der Einstellung &quot;Stopp-Hyphenate-Selektoren&quot; ausschließen, um die Silbentrennung für diese zu deaktivieren.</span></p>
-<p style="color:red;font-size:1.2em"><span title="">Es ist nicht empfohlen, &quot;body&quot; zu konfigurieren, wenn Sie Leistungsprobleme vermeiden möchten.</span> <span title="">Sie sollten kleinere Container definieren und spezifischer.</span> <span title="">In Joomla ist das normalerweise nur die Ausgabe von Komponenten wie einem Artikel.</span></p>
+<p style="color:red;font-size:1.2em">Es wird nicht empfohlen, &quot;body&quot; zu konfigurieren, wenn Sie Leistungsprobleme vermeiden möchten. Das bedeutet, dass Sie den <code>body</code>-Tag nur für erste Tests verwenden sollten.</p>
+<p style="color:red;font-size:1.2em"><span title="">Sie sollten kleinere Container definieren und spezifischer.</span> <span title="">In Joomla ist das normalerweise nur die Ausgabe von Komponenten wie einem Artikel.</span></p>
 <p><b>Tipp für Faule:</b></p>
 <ul>
 	<li><span title="">Umgeben Sie <code>&lt;jdoc:include type=&quot;component&quot; /&gt;</code> in Ihrer template-index.php mit einem zusätzlichen &quot;div&quot; -Container.</span>
@@ -11,7 +12,7 @@
 &lt;/div&gt;</pre>
 </li>
 <li>Dann gebe Sie in das Feld <code>.makeMeHyphenated</code> ein.</li>
-<li>Sie können auch <code>&lt;div class=&quot;hyphenate&quot;&gt;</code>schreiben und in dieses Feld einen &quot;Unsinns-Selektor&quot; eingeben (siehe unten), aber geben Sie hier niemals <code>.hyphenate</code> ein!</li>
+<li>Sie können auch <code>&lt;div class=&quot;hyphenate&quot;&gt;</code>schreiben und in dieses Feld einen &quot;Unsinns-Selektor&quot; eingeben (siehe unten warum), aber geben Sie in das Feld niemals <code>.hyphenate</code> ein!</li>
 </ul>
 <h5>Beispiel mit  CSS-Klasse <code>.item-page</code></h5>
 <p>Alle Tags (Elemente) mit Klasse <code>item-page</code> bekommen automatisch eine zusätzliche Klasse <code>hyphenate</code>. <code>&lt;div class=&quot;item-page something-else&quot;&gt;</code> wird zu <code>&lt;div class=&quot;item-page something-else hyphenate&quot;&gt;</code></p>
