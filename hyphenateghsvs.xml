@@ -63,14 +63,15 @@ Since 2016.09.26:
 		<folder>fields</folder>
 		<folder>language</folder>
 		<folder>layouts</folder>
-		<!--<folder>media</folder>-->
 		<folder>myforms</folder>
 	</files>
+
 	<media folder="media" destination="plg_system_hyphenateghsvs">
 		<folder>css</folder>
 		<folder>js</folder>
 		<folder>images</folder>
 	</media>
+
 	<config>
 		<fields name="params" addfieldpath="plugins/system/hyphenateghsvs/fields">
 
@@ -83,9 +84,6 @@ Since 2016.09.26:
 					descriptiontext="PLG_HYPHENATEGHSVS_SPACERTHANKS"
 					hidden="true"
 					additionalClass="thanks" />
-
-				<field name="assetsbe" type="plgSystemHyphenateGhsvs.assetsbe" hidden="true"
-					loadjs="false" loadcss="true" />
 			</fieldset><!--/thanks-->
 
 			<fieldset name="long_description" label="PLG_HYPHENATEGHSVS_FIELDSET_LONG_DESCRIPTION">
@@ -105,6 +103,7 @@ Since 2016.09.26:
 
 			<fieldset name="hypenateSelectors" label="PLG_HYPHENATEGHSVS_FIELDSET_SELECTORS" description="">
 
+<!--HYPHENATE-->
 				<field name="hyphenateNote" type="plgSystemHyphenateGhsvs.longdescription"
 					hiddenLabel="true"
 					additionalClass="hyphenate"
@@ -115,6 +114,7 @@ Since 2016.09.26:
 					label="PLG_SYSTEM_HYPHENATEGHSVS_HYPHENATE"
 					description="" />
 
+<!--DONTHYPHENATE-->
 				<field name="donthyphenateNote" type="plgSystemHyphenateGhsvs.longdescription"
 					hiddenLabel="true"
 					additionalClass="donthyphenate"
@@ -125,13 +125,14 @@ Since 2016.09.26:
 					label="PLG_SYSTEM_HYPHENATEGHSVS_DONTHYPHENATE"
 					description="" />
 
+<!--ADD_HYPENATE_CSS-->
 				<field name="add_hypenate_cssNote" type="plgSystemHyphenateGhsvs.longdescription"
 					hiddenLabel="true"
 					additionalClass="add_hypenate_css"
 					descriptiontext="PLG_HYPHENATEGHSVS_ADD_HYPENATE_CSS_DESC"
 					contentToggler="true" />
 
-				<field name="add_hypenate_css" type="radio" default="0"
+				<field name="add_hypenate_css" type="radio" default="1"
 					class="switcher btn-group btn-group-yesno"
 					label="PLG_HYPHENATEGHSVS_ADD_HYPENATE_CSS"
 					description=""
@@ -143,6 +144,7 @@ Since 2016.09.26:
 
 			<fieldset name="languages" label="PLG_HYPHENATEGHSVS_FIELDSET_LANGUAGES" description="">
 
+<!--MODE-->
 				<field name="modeNote" type="plgSystemHyphenateGhsvs.longdescription"
 					hidden="true"
 					additionalClass="mode"
@@ -153,10 +155,25 @@ Since 2016.09.26:
 					class="switcher btn-group btn-group-yesno"
 					label="PLG_HYPHENATEGHSVS_MODE"
 					description="">
-						<option value="hyphenator">Hyphenator</option>
 						<option value="hyphenopoly">Hyphenopoly</option>
+						<option value="hyphenator">Hyphenator</option>
 				</field>
 
+<!--FRONTENDON-->
+				<field name="frontendonNote" type="plgSystemHyphenateGhsvs.longdescription"
+					hiddenLabel="true"
+					descriptiontext="PLG_SYSTEM_HYPHENATEGHSVS_FRONTENDON_DESC"/>
+		
+				<field name="frontendon" type="radio" default="0"
+					label="PLG_SYSTEM_HYPHENATEGHSVS_FRONTENDON"
+					class="switcher btn-group btn-group-yesno"
+					description=""
+					filter="integer">
+						<option value="0">JNO</option>
+						<option value="1">JYES</option>
+				</field>
+
+<!--LANGUAGES-->
 				<field name="languagesspacer" type="plgSystemHyphenateGhsvs.longdescription"
 					descriptiontext="PLG_HYPHENATEGHSVS_LANGUAGES_DESC"
 					showon="mode:hyphenator"
@@ -193,9 +210,9 @@ Since 2016.09.26:
 
 			<fieldset name="hypenateCss" label="PLG_HYPHENATEGHSVS_FIELDSET_CSS" description="">
 
+<!--ROBOTS-->
 				<field name="robotsNote" type="plgSystemHyphenateGhsvs.longdescription"
 					hiddenLabel="true"
-					label="Not available with setting Mode=Hyphenator."
 					descriptiontext="PLG_HYPHENATEGHSVS_ROBOTS_DESC" />
 
 				<field name="robots" type="radio" default="0"
@@ -205,17 +222,19 @@ Since 2016.09.26:
 						<option value="1">JYES</option>
 				</field>
 
+<!--VANILLA-->
 				<field name="vanillaNote" type="plgSystemHyphenateGhsvs.longdescription"
 					hiddenLabel="true"
 					descriptiontext="PLG_HYPHENATEGHSVS_VANILLA_DESC" />
 
-				<field name="vanilla" type="radio" default="0"
+				<field name="vanilla" type="radio" default="1"
 					label="PLG_HYPHENATEGHSVS_VANILLA"
 					description="" class="switcher btn-group btn-group-yesno">
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
 				</field>
 
+<!--UNCOMPRESSED-->
 				<field name="uncompressedNote" type="plgSystemHyphenateGhsvs.longdescription"
 					hiddenLabel="true"
 					descriptiontext="PLG_HYPHENATEGHSVS_UNCOMPRESSED_DESC" />
@@ -237,10 +256,11 @@ Since 2016.09.26:
 					contentToggler="true" showon="mode:hyphenopoly"/>
 
 				<field name="debugNote" type="spacer"
-					label="Not available with setting Mode=Hyphenator."
+					label="PLG_SYSTEM_HYPHENATEGHSVS_NOT_AVAILABLE_IN_MODE_HYPHENATOR"
 					description=""
 					showon="mode:hyphenator"/>
 
+<!--CLEANUP-->
 				<field name="cleanupNote" type="plgSystemHyphenateGhsvs.longdescription"
 					hiddenLabel="true"
 					additionalClass="cleanup"
@@ -256,6 +276,7 @@ Since 2016.09.26:
 						<option value="2">FORCE</option>
 				</field>
 
+<!--SILENTERRORS-->
 				<field name="silenterrorsNote" type="plgSystemHyphenateGhsvs.longdescription"
 					hiddenLabel="true"
 					additionalClass="silenterrors"
@@ -271,21 +292,7 @@ Since 2016.09.26:
 						<option value="1">JYES</option>
 				</field>
 
-				<field name="prettyPrintNote" type="plgSystemHyphenateGhsvs.longdescription"
-					hiddenLabel="true"
-					additionalClass="prettyPrint"
-					descriptiontext="PLG_SYSTEM_HYPHENATEGHSVS_PRETTY_PRINT_DESC"
-					contentToggler="true" showon="mode:hyphenopoly" />
-
-				<field name="prettyPrint" type="radio" default="0"
-					class="switcher btn-group btn-group-yesno"
-					label="PLG_SYSTEM_HYPHENATEGHSVS_PRETTY_PRINT"
-					description=""
-					filter="integer" showon="mode:hyphenopoly">
-						<option value="0">JNO</option>
-						<option value="1">JYES</option>
-				</field>
-
+<!--LOG-->
 				<field name="logNote" type="plgSystemHyphenateGhsvs.longdescription"
 					hiddenLabel="true"
 					additionalClass="log"
@@ -306,6 +313,21 @@ Since 2016.09.26:
 					hiddenLabel="true"
 					showon="mode:hyphenopoly" />
 
+<!--PRETTYPRINT-->
+				<field name="prettyPrintNote" type="plgSystemHyphenateGhsvs.longdescription"
+					hiddenLabel="true"
+					additionalClass="prettyPrint"
+					descriptiontext="PLG_SYSTEM_HYPHENATEGHSVS_PRETTY_PRINT_DESC"
+					contentToggler="true" showon="mode:hyphenopoly" />
+
+				<field name="prettyPrint" type="radio" default="0"
+					class="switcher btn-group btn-group-yesno"
+					label="PLG_SYSTEM_HYPHENATEGHSVS_PRETTY_PRINT"
+					description=""
+					filter="integer" showon="mode:hyphenopoly">
+						<option value="0">JNO</option>
+						<option value="1">JYES</option>
+				</field>
 			</fieldset><!--/debug-->
 
 		</fields>
