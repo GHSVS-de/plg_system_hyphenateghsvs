@@ -142,9 +142,9 @@ class plgSystemHyphenateGhsvsFormFieldLongDescription extends FormField
 		{
 			$target = $this->id . 'contentToggler';
 			
-			$html[] = '<button class=contentToggler data-togglerContent=' . $target . '>';
+			$html[] = '<button type=button class=contentToggler data-togglerContent=' . $target . '>';
 			$html[] = $contentTogglerLabel;
-			$html[] = ' <span class=icon-chevron-down></span></button>';
+			$html[] = '</button>';
 			$html[] = '<div class=togglerContent id=' . $target . '>';
 		}
 		$html[] = $descriptiontext;
