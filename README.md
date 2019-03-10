@@ -1,49 +1,20 @@
 # plg_system_hyphenateghsvs
 
-## The current pre-release 2019.02.10 uses already Hyphenopoly.js!
-https://github.com/GHSVS-de/plg_system_hyphenateghsvs/releases/tag/2019.02.10
+Joomla-Plugin. Intelligent Hyphenation for browsers that do NOT support CSS property hyphens (e.g. Chrome) or do not support languages that you can select in this plugin. See supported languages at https://github.com/mnater/Hyphenopoly/tree/2.8.0/patterns
 
-## Old description but still valid for the Hyphenator.js part of this plugin
-Joomla-Plugin. Hyphenation for browsers that do NOT support CSS property hyphens (e.g. Chrome) or do not support languages you selected in this plugin.
+You can report issues, ask questions in english or german: https://github.com/GHSVS-de/plg_system_hyphenateghsvs/issues or via email (see ghsvs.de/kontakt)
 
+## Description/Documentation
+You'll find detailed descriptions of all configuration options inside the plugin.
+
+## Uses since release 2019.03.10 recommended Hyphenopoly.js (besides old Hyphenater.js for updaters)!
+https://github.com/GHSVS-de/plg_system_hyphenateghsvs/releases/tag/2019.03.10
+
+## Version history
+https://github.com/GHSVS-de/plg_system_hyphenateghsvs/wiki/Version-history-plg_system_hyphenateghsvs
+
+## Thanks
 This Joomla plugin...
-...uses Hyphenate JavaScript library from https://github.com/mnater/Hyphenator provided by Mathias Nater (mnater).
+...provides old Hyphenatator JavaScript library from https://github.com/mnater/Hyphenator provided by Mathias Nater (mnater).
+...provides new Hyphenopoly JavaScript library from https://github.com/mnater/Hyphenopoly provided by Mathias Nater (mnater).
 
-You can report issues in english or german: https://github.com/GHSVS-de/plg_system_hyphenateghsvs/issues
-
-See version history https://github.com/GHSVS-de/plg_system_hyphenateghsvs/wiki/Version-history-plg_system_hyphenateghsvs
-
-See German manual: https://www.ghsvs.de/programmierer-schnipsel/joomla/191-joomla-silbentrennungs-plugin-hyphenateghsvs-fuer-doofe-browser
-
-See short English description: https://extensions.joomla.org/extension/hyphenateghsvs/
-
-## Don't forget to add:
-
-### in your CSS file:
-```
-.hyphenate{
-word-wrap: break-word;
--webkit-hyphens: auto;
--moz-hyphens: auto;
--ms-hyphens: auto;
--o-hyphens: auto;
-hyphens: auto
-}
-.donthyphenate{
-word-wrap: break-word;
--webkit-hyphens: none;
--moz-hyphens: none;
--ms-hyphens: none;
--o-hyphens: none;
-hyphens: none
-}
-```
-### or in your Bootstrap LESS
-```
-.hyphenate{
- .hyphens();
-}
-.donthyphenate{
- .hyphens(none);
-}
-```
