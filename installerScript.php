@@ -23,6 +23,13 @@ use Joomla\CMS\Installer\InstallerScript;
 
 class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 {
+	public function __construct()
+	{
+		$this->deleteFiles = array(
+			Factory::getApplication()->get('log_path') . '/plg_system_hyphenateghsvs-log.txt',
+		);
+	}
+
 	public function preflight($type, $parent)
 	{
 		$manifest = @$parent->getManifest();
@@ -64,5 +71,10 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 			}
 		}
 		return true;
+	}
+
+	public function uninstall($parent)
+	{
+		$this->removeFiles();
 	}
 }
