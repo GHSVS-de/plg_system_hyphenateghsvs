@@ -15,6 +15,8 @@ https://github.com/GHSVS-de/plg_system_hyphenateghsvs/wiki/Version-history-plg_s
 
 ## Thanks
 This Joomla plugin...
-...provides old Hyphenatator JavaScript library from https://github.com/mnater/Hyphenator provided by Mathias Nater (mnater).
-...provides new Hyphenopoly JavaScript library from https://github.com/mnater/Hyphenopoly provided by Mathias Nater (mnater).
+
+...provides old Hyphenatator JavaScript library from https://github.com/mnater/Hyphenator programmed by Mathias Nater (mnater).
+
+...provides new Hyphenopoly JavaScript library from https://github.com/mnater/Hyphenopoly programmed by Mathias Nater (mnater).
 
