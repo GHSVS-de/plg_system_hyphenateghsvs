@@ -26,7 +26,10 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 	public function __construct()
 	{
 		$this->deleteFiles = array(
-			Factory::getApplication()->get('log_path') . '/plg_system_hyphenateghsvs-log.txt',
+			str_replace(
+				JPATH_ROOT, '',
+				Factory::getApplication()->get('log_path') . '/plg_system_hyphenateghsvs-log.txt'
+			),
 		);
 	}
 
