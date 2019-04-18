@@ -35,6 +35,11 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 
 	public function preflight($type, $parent)
 	{
+		if (!parent::preflight($type, $parent))
+		{
+			return false;
+		}
+
 		$manifest = @$parent->getManifest();
 		
 		if ($manifest instanceof SimpleXMLElement)
