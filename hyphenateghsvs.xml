@@ -59,7 +59,7 @@ Since 2016.09.26:
 
 	<description>PLG_SYSTEM_HYPHENATEGHSVS_XML_DESCRIPTION</description>
 
-	<updateservers><server type="extension" priority="1" name="PLG_SYSTEM_HYPHENATEGHSVS">https://raw.githubusercontent.com/GHSVS-de/plg_system_hyphenateghsvs/master/updateserver-infos.xml</server></updateservers>
+	<updateservers><server type="extension" priority="1" name="PLG_SYSTEM_HYPHENATEGHSVS">https://raw.githubusercontent.com/GHSVS-de/plg_system_hyphenateghsvs/next-version-since-2019-06/updateserver-infos.xml</server></updateservers>
 
 	<scriptfile>installerScript.php</scriptfile>
 	<minimumPhp>7.0.0</minimumPhp>
