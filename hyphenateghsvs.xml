@@ -60,7 +60,7 @@ Since 2016.09.26:
 	<description>PLG_SYSTEM_HYPHENATEGHSVS_XML_DESCRIPTION</description>
 
 	<updateservers><server type="extension" priority="1" name="PLG_SYSTEM_HYPHENATEGHSVS">https://raw.githubusercontent.com/GHSVS-de/plg_system_hyphenateghsvs/master/updateserver-infos.xml</server></updateservers>
-
+	<changelogurl>https://raw.githubusercontent.com/GHSVS-de/upadateservers/master/plg_system_hyphenateghsvs_changelog.xml</changelogurl>
 	<scriptfile>installerScript.php</scriptfile>
 	<minimumPhp>7.0.0</minimumPhp>
 	<minimumJoomla>3.9.0</minimumJoomla>
@@ -105,11 +105,11 @@ Since 2016.09.26:
 			</fieldset><!--/thanks-->
 
 			<fieldset name="long_description" label="PLG_HYPHENATEGHSVS_FIELDSET_LONG_DESCRIPTION">
-			
+
 				<field name="version" type="plgSystemHyphenateGhsvs.version"
 					label="JVERSION"
 					description=""/>
-			
+
 				<field name="long_descriptiomNote" type="plgSystemHyphenateGhsvs.longdescription"
 					descriptiontext="{INCLUDE-FILE:Long-Description.html:}"
 					hidden="true"
