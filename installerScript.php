@@ -39,7 +39,12 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 		{
 			return false;
 		}
-$this->removeOldUpdateservers();
+		
+		if ($type === 'update')
+		{
+			$this->removeOldUpdateservers();
+		}
+
 		$manifest = @$parent->getManifest();
 		
 		if ($manifest instanceof SimpleXMLElement)
