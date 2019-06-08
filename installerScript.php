@@ -87,7 +87,7 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 	}
 
 	/**
-	 * Method to update Joomla!
+	 * Method to update.
 	 *
 	 * @param   JInstaller  $installer  The class calling this method
 	 *
