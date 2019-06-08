@@ -93,8 +93,9 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 	 *
 	 * @return  void
 	 */
-	public function update($installer)
+	function postflight($type, $parent)
 	{
+		parent::postflight($type, $parent);
 		$this->removeOldUpdateservers();
 	}
 
