@@ -85,4 +85,67 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 	{
 		$this->removeFiles();
 	}
+
+	/**
+	 * Method to update Joomla!
+	 *
+	 * @param   JInstaller  $installer  The class calling this method
+	 *
+	 * @return  void
+	 */
+	public function update($installer)
+	{
+		$this->removeOldUpdateservers();
+	}
+
+	/**
+	 * Remove the outdated updateservers.
+	 *
+	 * @return  void
+	 *
+	 * @since   version after 2019.05.29
+	 */
+	protected function removeOldUpdateservers()
+	{
+		$db = Factory::getDbo();
+		try
+		{
+			$query = $db->getQuery(true);
+
+			$query->select('update_site_id')
+				->from($db->qn('#__update_sites'))
+				->where($db->qn('location') . ' = '
+					. $db->q('https://snapshots.ghsvs.de/updates/joomla/plg_system_hyphenateghsvs.xml'), 'OR')
+				->where($db->qn('location') . ' = '
+					. $db->q('http://snapshots.ghsvs.de/updates/joomla/plg_system_hyphenateghsvs.xml'));
+
+			$ids = $db->setQuery($query)->loadAssocList('update_site_id');
+
+			if (!$ids)
+			{
+				return;
+			}
+
+			$ids = \array_keys($ids);
+			$ids = implode(',', $ids);
+
+			// Delete from update sites
+			$db->setQuery(
+				$db->getQuery(true)
+					->delete($db->qn('#__update_sites'))
+					->where($db->qn('update_site_id') . ' IN (' . $ids . ')')
+			)->execute();
+
+			// Delete from update sites extensions
+			$db->setQuery(
+				$db->getQuery(true)
+					->delete($db->qn('#__update_sites_extensions'))
+					->where($db->qn('update_site_id') . ' IN (' . $ids . ')')
+			)->execute();
+		}
+		catch (Exception $e)
+		{
+			return;
+		}
+	}
 }
