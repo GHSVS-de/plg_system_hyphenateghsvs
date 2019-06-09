@@ -59,8 +59,8 @@ Since 2016.09.26:
 
 	<description>PLG_SYSTEM_HYPHENATEGHSVS_XML_DESCRIPTION</description>
 
-	<updateservers><server type="extension" priority="1" name="PLG_SYSTEM_HYPHENATEGHSVS">https://raw.githubusercontent.com/GHSVS-de/upadateservers/master/plg_system_hyphenateghsvs.xml</server></updateservers>
-	<changelogurl>https://raw.githubusercontent.com/GHSVS-de/upadateservers/master/plg_system_hyphenateghsvs_changelog.xml</changelogurl>
+	<updateservers><server type="extension" priority="1" name="PLG_SYSTEM_HYPHENATEGHSVS">https://raw.githubusercontent.com/GHSVS-de/upadateservers/master/hyphenateghsvs-update.xml</server></updateservers>
+	<changelogurl>https://raw.githubusercontent.com/GHSVS-de/upadateservers/master/hyphenateghsvs-changelog.xml</changelogurl>
 	<scriptfile>installerScript.php</scriptfile>
 	<minimumPhp>7.0.0</minimumPhp>
 	<minimumJoomla>3.9.0</minimumJoomla>

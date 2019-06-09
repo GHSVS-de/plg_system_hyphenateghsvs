@@ -39,23 +39,23 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 		{
 			return false;
 		}
-		
+
 		if ($type === 'update')
 		{
 			$this->removeOldUpdateservers();
 		}
 
 		$manifest = @$parent->getManifest();
-		
+
 		if ($manifest instanceof SimpleXMLElement)
 		{
 			$minimumPhp = trim((string) $manifest->minimumPhp);
 			$minimumJoomla = trim((string) $manifest->minimumJoomla);
-			
+
 			// Custom
 			$maximumPhp = trim((string) $manifest->maximumPhp);
 			$maximumJoomla = trim((string) $manifest->maximumJoomla);
-			
+
 			$this->minimumPhp = $minimumPhp ? $minimumPhp : $this->minimumPhp;
 			$this->minimumJoomla = $minimumJoomla ? $minimumJoomla : $this->minimumJoomla;
 
@@ -69,15 +69,15 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 			if ($maximumPhp && version_compare(PHP_VERSION, $maximumPhp, '>'))
 			{
 				$msg = 'Your PHP version (' . PHP_VERSION . ') is too high for this extension. Maximum PHP version is: ' . $maximumPhp . '.';
-				
+
 				JLog::add($msg, JLog::WARNING, 'jerror');
 			}
-			
+
 			if (isset($msg))
 			{
 				return false;
 			}
-			
+
 			if (trim((string) $manifest->allowDowngrades))
 			{
 				$this->allowDowngrades = true;
@@ -116,9 +116,10 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 		try
 		{
 			$query = $db->getQuery(true);
-
 			$query->select('update_site_id')
 				->from($db->qn('#__update_sites'))
+				->where($db->qn('location') . ' = '
+					. $db->q('https://raw.githubusercontent.com/GHSVS-de/upadateservers/master/plg_system_hyphenateghsvs_changelog.xml'), 'OR')
 				->where($db->qn('location') . ' = '
 					. $db->q('https://snapshots.ghsvs.de/updates/joomla/plg_system_hyphenateghsvs.xml'), 'OR')
 				->where($db->qn('location') . ' = '
