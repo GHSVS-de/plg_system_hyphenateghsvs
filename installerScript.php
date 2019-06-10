@@ -18,8 +18,10 @@
  * <allowDowngrades>1</allowDowngrades>
  */
 defined('_JEXEC') or die;
+
 use Joomla\CMS\Factory;
 use Joomla\CMS\Installer\InstallerScript;
+use Joomla\CMS\Log\Log;
 
 class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 {
@@ -62,7 +64,7 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 			if ($maximumJoomla && version_compare(JVERSION, $maximumJoomla, '>'))
 			{
 				$msg = 'Your Joomla version (' . JVERSION . ') is too high for this extension. Maximum Joomla version is: ' . $maximumJoomla . '.';
-				JLog::add($msg, JLog::WARNING, 'jerror');
+				Log::add($msg, Log::WARNING, 'jerror');
 			}
 
 			// Check for the maximum PHP version before continuing
@@ -70,7 +72,7 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 			{
 				$msg = 'Your PHP version (' . PHP_VERSION . ') is too high for this extension. Maximum PHP version is: ' . $maximumPhp . '.';
 
-				JLog::add($msg, JLog::WARNING, 'jerror');
+				Log::add($msg, Log::WARNING, 'jerror');
 			}
 
 			if (isset($msg))
