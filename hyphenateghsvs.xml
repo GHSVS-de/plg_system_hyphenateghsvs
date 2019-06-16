@@ -9,52 +9,7 @@
 	<authorUrl>https://www.ghsvs.de</authorUrl>
 	<version>2019.06.08</version>
 	<versionHistory>
-2016.02.28:
-- First version.
-- Based upon Hyphenator 5.1.0 - client side hyphenation for webbrowsers, https://github.com/mnater/Hyphenator
-- neue.aurikulomedizin.eu
-- Only German embedded.
-- No CSS3 fallback.
-- No Hyphenator_Loader
-- JQuery based AJAX loading of Hyphenator.js.
-2016.07.20;
-- koerperundraum-berlin.de
-- de, en
-- CSS3 fallback.
-- Hyphenator_Loader.
-- KEIN JQuery based AJAX loading of Hyphenator.js.
-- Ziel: Alle Browser, die CSS-hyphens verstehen, können ausschließlich via CSS und media-queries gesteuert werden.
-Alle Browser, die das nicht verstehen (z.B. Chrome) haben immer Hyphens via JavaScript.
-- Mir ist noch keine Lösung eingefallen JS-Hyphens dieses Plugins responsiv zu steuern. Ist hyphenate.js mal geladen, reagiert es auch nicht auf zurückgenommene CSS-Klasen hyphenate oder hinzugefügte donthyphenate.
-- relaunchbs3.ghsvs.de.
-2016.08.05:
-- Option Activate for robots.
-- Code cleaning hyphenateghsvs.php.
-- Load (only!) Hyphenator_Loader.js via JHtml script (Template overrides possible).
-- Option Load Uncompressed.
-- Only EN and DE are prepared in hyphenateghsvs.php for CSS-hyphen detection!
-2016.08.08:
-- Hyphenator 5.2.0(devel).
-2016.08.16:
-- Add vanilla JS option and script.
-- Add all languages as Hyphenator_Loader configuration options based upon /patterns/.
-- Remove defaultLanguage.
-2016.08.20:
-- Add correct doc comments @license for JED.
-Since 2016.09.26:
-- versionHistory: See https://github.com/GHSVS-de/plg_system_hyphenateghsvs/wiki/Version-history-plg_system_hyphenateghsvs
-2019.02.10:
-- Add Hyphenopoly https://github.com/mnater/Hyphenopoly
-2019.03.10:
-- New stable release.
-2019.03.30:
-- Hyphenopoly 3.0.0
-2019.04.18:
-- Hyphenopoly 3.0.1
-2019.04.29:
-- Hyphenopoly 3.0.2
-2019.05.29:
-- Hyphenopoly 3.1.0
+		https://updates.ghsvs.de/changelog.php?file=hyphenateghsvs
 	</versionHistory>
 
 	<description>PLG_SYSTEM_HYPHENATEGHSVS_XML_DESCRIPTION</description>
