@@ -235,7 +235,7 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 			}
 			else
 			{
-				$doc->addCustomTag('<meta name=!hyphenopolyInit! content=!INITHYPHENOPOLYHERE!>');
+				$doc->addCustomTag($this->cleanupMarker);
 			}
 		}
 
