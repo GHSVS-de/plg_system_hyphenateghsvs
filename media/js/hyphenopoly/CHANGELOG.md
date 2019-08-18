@@ -1,6 +1,20 @@
 # Version History
 
-## Version 3.1.0 (2019-04-28)
+## Version 3.1.2 (2019-07-24)
+### Fixed
+*   Fixed "Critical dependency: the request of a dependency is an expression" in webpack (issue#70)
+*   bump devDependencies
+
+## Version 3.1.1 (2019-06-28)
+### Fixed
+*   bump devDependencies
+
+### Changed
+*   doc: uild github page from docs folder
+*   tools: move eslint config from package.json to .eslintrc
+*   tools: remove manual replacement of mutable globals when compiling to wasm
+
+## Version 3.1.0 (2019-05-28)
 ### Fixed
 *   Correctly reject hyphenator promises (issue#77)
 *   performance: reduce file size of Hyphenopoly_Loader.js

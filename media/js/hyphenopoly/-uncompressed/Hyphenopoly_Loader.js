@@ -1,5 +1,5 @@
 /**
- * @license Hyphenopoly_Loader 3.1.0 - client side hyphenation
+ * @license Hyphenopoly_Loader 3.1.2 - client side hyphenation
  * ©2019  Mathias Nater, Zürich (mathiasnater at gmail dot com)
  * https://github.com/mnater/Hyphenopoly
  *
@@ -7,7 +7,7 @@
  * http://mnater.github.io/Hyphenopoly/LICENSE
  */
 
-/* global Hyphenopoly */
+/* globals Hyphenopoly:readonly */
 
 /**
  * Wrap all code in an iife to keep a scope. Important objects are parameters
