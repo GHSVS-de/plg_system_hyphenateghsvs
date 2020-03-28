@@ -340,7 +340,7 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 				$file = __DIR__ . '/myforms/' . $file . '.xml';
 
 				if (
-					empty($subformData) || !is_object($subformData)
+					!is_object($subformData) || !count(get_object_vars($subformData))
 					|| !is_file($file)
 				)
 				{
