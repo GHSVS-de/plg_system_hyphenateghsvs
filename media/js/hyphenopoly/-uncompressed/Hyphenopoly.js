@@ -1,5 +1,5 @@
 /**
- * @license Hyphenopoly 3.1.2 - client side hyphenation for webbrowsers
+ * @license Hyphenopoly 3.4.0 - client side hyphenation for webbrowsers
  * ©2019  Mathias Nater, Zürich (mathiasnater at gmail dot com)
  * https://github.com/mnater/Hyphenopoly
  *
@@ -71,13 +71,23 @@
      * @returns {undefined}
      */
     function registerOnCopy(el) {
-        el.addEventListener("copy", function oncopy(e) {
-            e.preventDefault();
-            const selectedText = window.getSelection().toString();
-            /* eslint-disable security/detect-non-literal-regexp */
-            e.clipboardData.setData("text/plain", selectedText.replace(new RegExp(SOFTHYPHEN, "g"), ""));
-            /* eslint-enable security/detect-non-literal-regexp */
-        }, true);
+        el.addEventListener(
+            "copy",
+            function oncopy(e) {
+                e.preventDefault();
+                const sel = w.getSelection();
+                const docFrag = sel.getRangeAt(0).cloneContents();
+                const div = document.createElement("div");
+                div.appendChild(docFrag);
+                const selectedHTML = div.innerHTML;
+                const selectedText = sel.toString();
+                /* eslint-disable security/detect-non-literal-regexp */
+                e.clipboardData.setData("text/plain", selectedText.replace(new RegExp(SOFTHYPHEN, "g"), ""));
+                e.clipboardData.setData("text/html", selectedHTML.replace(new RegExp(SOFTHYPHEN, "g"), ""));
+                /* eslint-enable security/detect-non-literal-regexp */
+            },
+            true
+        );
     }
 
     (function configurationFactory(H) {
@@ -95,6 +105,7 @@
             }()), 2),
             "dontHyphenateClass": setProp("donthyphenate", 2),
             "exceptions": setProp(empty(), 2),
+            "keepAlive": setProp(true, 2),
             "normalize": setProp(false, 2),
             "safeCopy": setProp(true, 2),
             "timeout": setProp(1000, 2)
@@ -108,6 +119,7 @@
             "leftmin": setProp(0, 2),
             "leftminPerLang": setProp(0, 2),
             "minWordLength": setProp(6, 2),
+            "mixedCase": setProp(true, 2),
             "orphanControl": setProp(1, 2),
             "rightmin": setProp(0, 2),
             "rightminPerLang": setProp(0, 2)
@@ -408,12 +420,29 @@
             }
 
             /**
+             * Checks if a string is mixed case
+             * @param {string} s The string
+             * @returns {boolean} true if s is mixed case
+             */
+            function isMixedCase(s) {
+                return Array.prototype.map.call(s, function mapper(c) {
+                    return (c === c.toLowerCase());
+                }).some(function checker(v, i, a) {
+                    return (v !== a[0]);
+                });
+            }
+
+            /* eslint-disable complexity */
+            /**
              * HyphenateFunction for words (compound or not)
              * @param {string} word The word
              * @returns {string} The hyphenated word
              */
             function hyphenator(word) {
                 let hw = lo.cache.get(sel).get(word);
+                if (!classSettings.mixedCase && isMixedCase(word)) {
+                    hw = word;
+                }
                 if (!hw) {
                     if (lo.exceptions.has(word)) {
                         hw = lo.exceptions.get(word).replace(
@@ -431,7 +460,7 @@
                         /* eslint-disable security/detect-object-injection */
                             hw = lo.hyphenateFunction(
                                 word,
-                                hyphen,
+                                hyphen.charCodeAt(0),
                                 classSettings.leftminPerLang[lang],
                                 classSettings.rightminPerLang[lang]
                             );
@@ -444,6 +473,7 @@
                 }
                 return hw;
             }
+            /* eslint-enable complexity */
             wordHyphenatorPool.set(lang + "-" + sel, hyphenator);
             return hyphenator;
         }
@@ -766,7 +796,7 @@
          * Polyfill for TextDecoder
          */
         const decode = (function makeDecoder() {
-            if (window.TextDecoder) {
+            if (w.TextDecoder) {
                 const utf16ledecoder = new TextDecoder("utf-16le");
                 return function decoder(ui16) {
                     return utf16ledecoder.decode(ui16);
@@ -903,32 +933,27 @@
                 baseData.wo >> 1,
                 (baseData.wo >> 1) + 64
             );
-            const defLeftmin = baseData.lm;
-            const defRightmin = baseData.rm;
             const hydWrdStore = (new Uint16Array(heapBuffer)).subarray(
                 baseData.hw >> 1,
                 (baseData.hw >> 1) + 128
             );
             /* eslint-enable no-bitwise */
             wordStore[0] = 95;
-            return function enclHyphenate(word, hyphenchar, leftmin, rightmin) {
+            return function enclHyphenate(word, hyphencc, leftmin, rightmin) {
                 let i = 0;
-                let cc = word.charCodeAt(i);
-                leftmin = leftmin || defLeftmin;
-                rightmin = rightmin || defRightmin;
-                while (cc) {
+                let cc = 0;
+                do {
+                    cc = word.charCodeAt(i);
                     i += 1;
                     // eslint-disable-next-line security/detect-object-injection
                     wordStore[i] = cc;
-                    cc = word.charCodeAt(i);
-                }
-                wordStore[i + 1] = 95;
-                wordStore[i + 2] = 0;
-                if (hyphenateFunc(leftmin, rightmin) === 1) {
+                } while (cc);
+                /* eslint-disable security/detect-object-injection */
+                wordStore[i] = 95;
+                wordStore[i + 1] = 0;
+                /* eslint-enable security/detect-object-injection */
+                if (hyphenateFunc(leftmin, rightmin, hyphencc) === 1) {
                     word = decode(hydWrdStore.subarray(1, hydWrdStore[0] + 1));
-                    if (hyphenchar !== "\u00AD") {
-                        word = word.replace(/\u00AD/g, hyphenchar);
-                    }
                 }
                 return word;
             };
@@ -1007,10 +1032,10 @@
             baseData.heapBuffer = heapBuffer;
             const theHyphenEngine = asmHyphenEngine(
                 {
-                    "Int32Array": window.Int32Array,
+                    "Int32Array": w.Int32Array,
                     "Math": Math,
-                    "Uint16Array": window.Uint16Array,
-                    "Uint8Array": window.Uint8Array
+                    "Uint16Array": w.Uint16Array,
+                    "Uint8Array": w.Uint8Array
                 },
                 baseData,
                 baseData.heapBuffer
@@ -1125,8 +1150,11 @@
             "hyphenopolyEnd",
             function def() {
                 w.clearTimeout(C.timeOutHandler);
-                if (H.c.hide !== "none") {
+                if (C.hide !== "none") {
                     H.toggle("on");
+                }
+                if (!C.keepAlive) {
+                    window.Hyphenopoly = null;
                 }
             },
             false

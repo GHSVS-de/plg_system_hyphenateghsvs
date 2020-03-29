@@ -1,5 +1,5 @@
 /**
- * @license Hyphenopoly_Loader 3.1.2 - client side hyphenation
+ * @license Hyphenopoly_Loader 3.4.0 - client side hyphenation
  * ©2019  Mathias Nater, Zürich (mathiasnater at gmail dot com)
  * https://github.com/mnater/Hyphenopoly
  *
@@ -153,8 +153,7 @@
                     myStyle += sel + " {color: transparent !important}\n";
                 });
                 break;
-            default:
-                myStyle = "";
+            // No Default
             }
             sc.appendChild(d.createTextNode(myStyle));
             d.head.appendChild(sc);
@@ -173,7 +172,7 @@
         const deferred = [];
 
         /*
-         * Eegister for custom event handlers, where event is not yet defined
+         * Register for custom event handlers, where event is not yet defined
          * these events will be correctly registered in Hyphenopoly.js
          */
         const tempRegister = [];
@@ -357,12 +356,12 @@
             /* eslint-disable array-element-newline */
             const module = new wa.Module(Uint8Array.from([
                 0, 97, 115, 109, 1, 0, 0, 0, 1, 6, 1, 96, 1, 127, 1, 127,
-                3, 2, 1, 0, 5, 3, 1, 0, 1, 7, 8, 1, 4, 116, 101, 115,
-                116, 0, 0, 10, 16, 1, 14, 0, 32, 0, 65, 1, 54, 2, 0, 32,
-                0, 40, 2, 0, 11
+                3, 2, 1, 0, 5, 3, 1, 0, 1, 7, 5, 1, 1, 116, 0, 0,
+                10, 16, 1, 14, 0, 32, 0, 65, 1, 54, 2, 0, 32, 0, 40, 2,
+                0, 11
             ]));
             /* eslint-enable array-element-newline */
-            return (new wa.Instance(module).exports.test(4) !== 0);
+            return (new wa.Instance(module).exports.t(4) !== 0);
         }
         return false;
     }
@@ -405,7 +404,7 @@
          * @returns {undefined}
          */
         function fetchBinary(p, f, n, m) {
-            w.fetch(p + f).then(
+            w.fetch(p + f, {"credentials": "include"}).then(
                 function resolve(response) {
                     if (response.ok) {
                         if (n === "hyphenEngine") {
@@ -451,7 +450,6 @@
          * @returns {undefined}
          */
         function requestBinary(p, f, n, m) {
-            /* eslint-disable-next-line no-negated-condition */
             const xhr = new XMLHttpRequest();
             xhr.onload = function onload() {
                 if (xhr.status === 200) {
@@ -525,18 +523,18 @@
             let fakeBody = null;
             /* eslint-disable array-element-newline */
             const css = [
-                "visibility:hidden;",
-                "-moz-hyphens:auto;",
-                "-webkit-hyphens:auto;",
-                "-ms-hyphens:auto;",
-                "hyphens:auto;",
-                "width:48px;",
-                "font-size:12px;",
-                "line-height:12px;",
-                "border:none;",
-                "padding:0;",
+                "visibility:hidden",
+                "-moz-hyphens:auto",
+                "-webkit-hyphens:auto",
+                "-ms-hyphens:auto",
+                "hyphens:auto",
+                "width:48px",
+                "font-size:12px",
+                "line-height:12px",
+                "border:none",
+                "padding:0",
                 "word-wrap:normal"
-            ].join("");
+            ].join(";");
             /* eslint-enable array-element-newline */
 
             /**
@@ -554,7 +552,9 @@
                 const testDiv = d.createElement("div");
                 testDiv.lang = lang;
                 testDiv.style.cssText = css;
-                testDiv.appendChild(d.createTextNode(lcRequire.get(lang)));
+                testDiv.appendChild(
+                    d.createTextNode(lcRequire.get(lang).toLowerCase())
+                );
                 fakeBody.appendChild(testDiv);
             }
 
@@ -619,16 +619,24 @@
             if (!H.hyphenators[lang]) {
                 if (w.Promise) {
                     H.hyphenators[lang] = new Promise(function pro(rs, rj) {
-                        H.events.addListener("engineReady", function handler(e) {
-                            if (e.msg === lang) {
-                                rs(H.createHyphenator(e.msg));
-                            }
-                        }, true);
-                        H.events.addListener("loadError", function handler(e) {
-                            if (e.name === lang || e.name === "hyphenEngine") {
-                                rj(new Error("File " + e.file + " can't be loaded from " + e.path));
-                            }
-                        }, false);
+                        H.events.addListener(
+                            "engineReady",
+                            function handler(e) {
+                                if (e.msg === lang) {
+                                    rs(H.createHyphenator(e.msg));
+                                }
+                            },
+                            true
+                        );
+                        H.events.addListener(
+                            "loadError",
+                            function handler(e) {
+                                if (e.name === lang || e.name === "hyphenEngine") {
+                                    rj(new Error("File " + e.file + " can't be loaded from " + e.path));
+                                }
+                            },
+                            false
+                        );
                     });
                     H.hyphenators[lang].catch(function catchPromiseError(e) {
                         H.events.dispatch(
@@ -693,15 +701,13 @@
 
         const testContainer = tester.append(d.documentElement);
         if (testContainer !== null) {
-            const nl = testContainer.getElementsByTagName("div");
-            eachKey(nl, function eachNode(n) {
-                /* eslint-disable security/detect-object-injection */
-                if (checkCSSHyphensSupport(nl[n]) && nl[n].offsetHeight > 12) {
-                    H.cf.langs[nl[n].lang] = "CSS";
+            const nl = testContainer.querySelectorAll("div");
+            Array.prototype.forEach.call(nl, function eachNode(n) {
+                if (checkCSSHyphensSupport(n) && n.offsetHeight > 12) {
+                    H.cf.langs[n.lang] = "CSS";
                 } else {
-                    loadPattern(nl[n].lang);
+                    loadPattern(n.lang);
                 }
-                /* eslint-enable security/detect-object-injection */
             });
             tester.clear();
         }
