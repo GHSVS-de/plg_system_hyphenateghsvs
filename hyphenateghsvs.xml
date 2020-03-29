@@ -19,7 +19,7 @@
 	<scriptfile>installerScript.php</scriptfile>
 	<minimumPhp>7.0.0</minimumPhp>
 	<minimumJoomla>3.9.0</minimumJoomla>
-	<maximumJoomla>3.9.99999</maximumJoomla>
+	<maximumJoomla>3.10.99999</maximumJoomla>
 	<allowDowngrades>1</allowDowngrades>
 
 	<files>
