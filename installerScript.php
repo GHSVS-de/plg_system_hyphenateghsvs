@@ -30,7 +30,7 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 	{
 		$deletePrefix = '/media/plg_system_hyphenateghsvs/js/hyphenopoly';
 		
-		// hpb files since version 2020.07.03.
+		// hpb files replaced with wasm files since version 2020.07.03.
 		$files = Folder::files(JPATH_SITE . $deletePrefix . '/patterns/',
 			$filter = '\.hpb$'
 		);
