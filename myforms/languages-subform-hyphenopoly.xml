@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
 	<field name="lang" type="filelist" directory="media/plg_system_hyphenateghsvs/js/hyphenopoly/patterns/"
-		stripext="1" hide_default="1" filter="\.hpb$" multiple="false" hide_none="true"
+		stripext="1" hide_default="1" filter="\.wasm$" multiple="false" hide_none="true"
 		label="PLG_SYSTEM_HYPHENATEGHSVS_LANGUAGES_HYPHENOPOLY"
 		description="" />
 

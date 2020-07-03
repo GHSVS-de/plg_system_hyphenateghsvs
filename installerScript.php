@@ -3,7 +3,7 @@
  * @package plugin.system hyphenateghsvs for Joomla!
  * @version See hyphenateghsvs.xml
  * @author G@HService Berlin Neukölln, Volkmar Volli Schlothauer
- * @copyright Copyright (C) 2016-2019, G@HService Berlin Neukölln, Volkmar Volli Schlothauer. All rights reserved.
+ * @copyright Copyright (C) 2016-2020, G@HService Berlin Neukölln, Volkmar Volli Schlothauer. All rights reserved.
  * @license GNU General Public License version 3 or later; see LICENSE.txt; see also LICENSE_Hyphenator.txt; see also LICENSE_Hyphenopoly.txt
  * @authorUrl https://www.ghsvs.de
  * @link https://github.com/GHSVS-de/plg_system_hyphenateghsvs
@@ -13,7 +13,7 @@
  * <minimumPhp>7.0.0</minimumPhp>
  * <minimumJoomla>3.9.0</minimumJoomla>
  * Yes, use 999999 to match '3.9'. Otherwise comparison will fail.
- * <maximumJoomla>3.9.999999</maximumJoomla>
+ * <maximumJoomla>3.10.999999</maximumJoomla>
  * <maximumPhp>7.3.999999</maximumPhp>
  * <allowDowngrades>1</allowDowngrades>
  */
@@ -22,17 +22,36 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Installer\InstallerScript;
 use Joomla\CMS\Log\Log;
+use Joomla\CMS\Filesystem\Folder;
 
 class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 {
 	public function __construct()
 	{
-		$this->deleteFiles = array(
-			str_replace(
-				JPATH_ROOT, '',
-				Factory::getApplication()->get('log_path') . '/plg_system_hyphenateghsvs-log.txt'
-			),
+		$deletePrefix = '/media/plg_system_hyphenateghsvs/js/hyphenopoly';
+		
+		// hpb files since version 2020.07.03.
+		$files = Folder::files(JPATH_SITE . $deletePrefix . '/patterns/',
+			$filter = '\.hpb$'
 		);
+		
+		foreach ($files as $file)
+		{
+			$this->deleteFiles[] = $deletePrefix . '/' . $file;
+		}
+		
+		$this->deleteFiles[] = $deletePrefix . '/hyphenEngine.asm.js';
+		$this->deleteFiles[] = $deletePrefix . '/hyphenEngine.wasm';
+		$this->deleteFiles[] = $deletePrefix . '/hyphenopoly.module.js';
+		$this->deleteFiles[] = $deletePrefix . '/-uncompressed/hyphenEngine.asm.js';
+		$this->deleteFiles[] = $deletePrefix . '/-uncompressed/hyphenEngine.wasm';
+		$this->deleteFiles[] = $deletePrefix . '/-uncompressed/hyphenopoly.module.js';
+		
+		$this->deleteFiles[] =
+			str_replace(
+				JPATH_SITE, '',
+				Factory::getApplication()->get('log_path') . '/plg_system_hyphenateghsvs-log.txt'
+			);
 	}
 
 	public function preflight($type, $parent)
@@ -97,17 +116,25 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 		$this->removeFiles();
 	}
 
+
 	/**
-	 * Method to update.
+	 * Runs right after any installation action is preformed on the component.
 	 *
-	 * @param   JInstaller  $installer  The class calling this method
+	 * @param  string    $type   - Type of PostFlight action. Possible values are:
+	 *                           - * install
+	 *                           - * update
+	 *                           - * discover_install
+	 * @param  \stdClass $parent - Parent object calling object.
 	 *
-	 * @return  void
+	 * @return void
 	 */
-	/*function postflight($type, $parent)
+	function postflight($type, $parent)
 	{
-		$this->removeOldUpdateservers();
-	}*/
+		if ($type === 'update')
+		{
+			$this->removeFiles();
+		}
+	}
 
 	/**
 	 * Remove the outdated updateservers.
