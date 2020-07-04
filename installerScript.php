@@ -37,7 +37,7 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 		
 		foreach ($files as $file)
 		{
-			$this->deleteFiles[] = $deletePrefix . '/' . $file;
+			$this->deleteFiles[] = $deletePrefix . '/patterns/' . $file;
 		}
 		
 		$this->deleteFiles[] = $deletePrefix . '/hyphenEngine.asm.js';
@@ -46,12 +46,17 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 		$this->deleteFiles[] = $deletePrefix . '/-uncompressed/hyphenEngine.asm.js';
 		$this->deleteFiles[] = $deletePrefix . '/-uncompressed/hyphenEngine.wasm';
 		$this->deleteFiles[] = $deletePrefix . '/-uncompressed/hyphenopoly.module.js';
+		$this->deleteFiles[] = $deletePrefix . '/-uncompressed/prepros-6.config';
+		$this->deleteFiles[] = $deletePrefix . '/-uncompressed/prepros.config';
+		$this->deleteFiles[] = $deletePrefix . '/_version2.7.0/index.html';
 		
 		$this->deleteFiles[] =
 			str_replace(
 				JPATH_SITE, '',
 				Factory::getApplication()->get('log_path') . '/plg_system_hyphenateghsvs-log.txt'
 			);
+			
+			$this->deleteFolders[] = $deletePrefix . '/_version2.7.0';
 	}
 
 	public function preflight($type, $parent)
