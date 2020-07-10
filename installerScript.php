@@ -28,12 +28,19 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 {
 	public function __construct()
 	{
+		$files = array();
+
 		$deletePrefix = '/media/plg_system_hyphenateghsvs/js/hyphenopoly';
 		
 		// hpb files replaced with wasm files since version 2020.07.03.
-		$files = Folder::files(JPATH_SITE . $deletePrefix . '/patterns/',
-			$filter = '\.hpb$'
-		);
+		$patternsPath = JPATH_SITE . $deletePrefix . '/patterns/';
+
+		if (is_dir($patternsPath))
+		{
+			$files = Folder::files($patternsPath,
+				$filter = '\.hpb$'
+			);
+		}
 		
 		foreach ($files as $file)
 		{
