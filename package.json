@@ -37,10 +37,8 @@
 	},
 	"scripts": {
 		"g-build": "node build.js",
-		"g-build-plus-svg": "node build.js --svg",
 		"g-npm-update-check": "ncu",
-		"g-ncu-override-json": "ncu -u",
-		"g-icons": "node build/build-svgs.js"
+		"g-ncu-override-json": "ncu -u"
 	},
 	"dependencies": {
 		"hyphenopoly": "^4.7.0"

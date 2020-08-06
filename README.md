@@ -6,6 +6,19 @@ Intelligent Hyphenation for browsers that do NOT support CSS property hyphens (e
 
 You can report issues, ask questions in english or german: https://github.com/GHSVS-de/plg_system_hyphenateghsvs/issues or via email (see https://ghsvs.de/kontakt)
 
+## Build
+- Adapt file `package.json`
+- `npm install` or `npm update`
+- `node build.js`
+- New ZIP in folder `/dist/` afterwards.
+- Only tested with WSL 1/Debian on WIndows 10.
+
+### New release/update for Joomla
+- Don't forget to link download to `/dist/...zip` inside tagged branch.
+
+## Users should only use official releases!
+- https://github.com/GHSVS-de/plg_system_hyphenateghsvs/releases
+
 ## Description/Documentation
 You'll find detailed descriptions of all configuration options inside the plugin after installation.
 
