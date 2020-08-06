@@ -8,9 +8,12 @@ You can report issues, ask questions in english or german: https://github.com/GH
 
 ## Build
 - Adapt file `package.json`
-- Base files are in folder `/src/`
+- Base/source files are in folder `/src/`
 - `npm install` or `npm update`
 - `node build.js`
+
+- External libraries like `hyphenopoly` are copied to `/src/` now (overriden!).
+- New built files are in folder `/package/` afterwards. Base for ZIP file.
 - New ZIP in folder `/dist/` afterwards.
 - Only tested with WSL 1/Debian on WIndows 10.
 
