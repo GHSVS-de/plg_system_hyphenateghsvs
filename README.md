@@ -8,6 +8,7 @@ You can report issues, ask questions in english or german: https://github.com/GH
 
 ## Build
 - Adapt file `package.json`
+- Base files are in folder `/src/`
 - `npm install` or `npm update`
 - `node build.js`
 - New ZIP in folder `/dist/` afterwards.
