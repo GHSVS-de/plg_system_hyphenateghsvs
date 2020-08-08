@@ -1,6 +1,6 @@
 {
 	"name": "plg_system_hyphenateghsvs",
-	"version": "2020.08.06",
+	"version": "2020.08.08-dev",
 	"minimumPhp": "7.0.0",
 	"maximumPhp": "",
 	"minimumJoomla": "3.9.0",

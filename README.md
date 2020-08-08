@@ -18,10 +18,8 @@ You can report issues, ask questions in english or german: https://github.com/GH
 - Only tested with WSL 1/Debian on WIndows 10.
 
 ### New release/update for Joomla
-- Don't forget to link download to `/dist/...zip` inside tagged branch.
-
-## Users should only use official releases!
-- https://github.com/GHSVS-de/plg_system_hyphenateghsvs/releases
+- Create new GitHub release/tag.
+- You can add extension ZIP file to "Assets" list via Drag&Drop. See "Attach binaries by dropping them here or selecting them.".
 
 ## Description/Documentation
 You'll find detailed descriptions of all configuration options inside the plugin after installation.
