@@ -1,5 +1,6 @@
 /node_modules/
 /package/
+/dist/
 .DS_Store
 _notes/
 __done/
@@ -9,5 +10,3 @@ prepros-6.config
 *.zip
 prepros.config
 prepros-6.config
-
-!/dist/**
