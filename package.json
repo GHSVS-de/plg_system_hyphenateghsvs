@@ -1,6 +1,6 @@
 {
 	"name": "plg_system_hyphenateghsvs",
-	"version": "2020.08.08-dev",
+	"version": "2020.08.30",
 	"minimumPhp": "7.0.0",
 	"maximumPhp": "",
 	"minimumJoomla": "3.9.0",
@@ -46,7 +46,7 @@
 	"devDependencies": {
 		"adm-zip": "0.4.16",
 		"chalk": "^4.1.0",
-		"commander": "^5.1.0",
+		"commander": "^6.1.0",
 		"fs-extra": "9.0.1",
 		"path": "^0.12.7",
 		"recursive-readdir": "^2.2.2",

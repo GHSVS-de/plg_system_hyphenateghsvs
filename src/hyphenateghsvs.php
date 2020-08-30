@@ -228,7 +228,9 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 					Uri::root(true) . '/media/' . self::$basepath . '/js/hyphenopoly/' . $this->uncompressed . '/',
 					'/'
 				);
-
+			
+			$this->setup['hide'] = $this->params->get('setup_hide', 'all');
+			
 			if (!$this->cleanup)
 			{
 				$hyphenopolyInit = $this->getHyphenopolyInit();
@@ -449,7 +451,7 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 	{
 		$Hyphenoply = array('require' => $this->require);
 
-		$dos = array('fallbacks', 'paths', 'handleEvent');
+		$dos = array('fallbacks', 'paths', 'handleEvent', 'setup');
 
 		foreach ($dos as $do)
 		{
