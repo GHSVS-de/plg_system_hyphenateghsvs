@@ -30,7 +30,7 @@ const RootPath = process.cwd();
 	// Remove old folders.
   await rimRaf("./dist");
   await rimRaf("./package");
-	
+
 	const source = `${__dirname}/node_modules/hyphenopoly`;
 	const target = `${__dirname}/src/media/js/hyphenopoly`;
 
@@ -52,11 +52,6 @@ const RootPath = process.cwd();
   await Fs.copy(
 		`${source}/min`,
 		`${target}`
-	);
-
-  await Fs.copy(
-		`${source}/CHANGELOG.md`,
-		`${target}/CHANGELOG.md`
 	);
 
   await Fs.copy(
