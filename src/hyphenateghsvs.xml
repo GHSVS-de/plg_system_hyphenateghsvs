@@ -126,7 +126,7 @@
 					descriptiontext="PLG_HYPHENATEGHSVS_MODE_DESC"
 					contentToggler="true" />
 
-				<field name="mode" type="radio" default="hyphenator"
+				<field name="mode" type="radio" default="hyphenopoly"
 					class="switcher btn-group btn-group-yesno"
 					label="PLG_HYPHENATEGHSVS_MODE"
 					description="">
