@@ -1,10 +1,10 @@
 {
 	"name": "plg_system_hyphenateghsvs",
-	"version": "2020.08.30",
+	"version": "2021.08.26",
 	"minimumPhp": "7.0.0",
 	"maximumPhp": "",
 	"minimumJoomla": "3.9.0",
-	"maximumJoomla": "3.10.99999",
+	"maximumJoomla": "4.9999.9999",
 	"allowDowngrades": "1",
 	"author": {
 		"name": "G@HService Berlin Neukölln, Volkmar Volli Schlothauer",
@@ -41,13 +41,13 @@
 		"g-ncu-override-json": "ncu -u"
 	},
 	"dependencies": {
-		"hyphenopoly": "^4.7.0"
+		"hyphenopoly": "^4.12.0"
 	},
 	"devDependencies": {
-		"adm-zip": "0.4.16",
-		"chalk": "^4.1.0",
-		"commander": "^6.1.0",
-		"fs-extra": "9.0.1",
+		"adm-zip": "0.5.5",
+		"chalk": "^4.1.2",
+		"commander": "^8.1.0",
+		"fs-extra": "10.0.0",
 		"path": "^0.12.7",
 		"recursive-readdir": "^2.2.2",
 		"rimraf": "3.0.2"
