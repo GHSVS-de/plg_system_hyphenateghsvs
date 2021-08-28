@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="3.9" type="plugin" group="system" method="upgrade">
-	<name>PLG_SYSTEM_HYPHENATEGHSVS</name>
-	<author>G@HService Berlin Neukölln, Volkmar Volli Schlothauer</author>
-	<creationDate>2016-02-28</creationDate>
-	<copyright>Copyright (C) 2016, G@HService Berlin Neukölln, Volkmar Volli Schlothauer. All rights reserved.</copyright>
-	<license>GNU General Public License version 3 or later; see LICENSE.txt; see also LICENSE_Hyphenator.txt</license>
-	<authorEmail></authorEmail>
-	<authorUrl>https://www.ghsvs.de</authorUrl>
+<extension type="plugin" group="system" method="upgrade">
+	<name>{{nameUpper}}</name>
+	<author>{{authorName}}</author>
+	<creationDate>{{creationDate}}</creationDate>
+	<copyright>{{copyright}}</copyright>
+	<license>{{licenseLong}}</license>
+	<authorUrl>{{authorUrl}}</authorUrl>
 	<version>{{version}}</version>
 	<versionHistory>
 		https://updates.ghsvs.de/changelog.php?file=hyphenateghsvs
 	</versionHistory>
+	<description>{{nameUpper}}_XML_DESCRIPTION</description>
 
-	<description>PLG_SYSTEM_HYPHENATEGHSVS_XML_DESCRIPTION</description>
+	<updateservers><server type="extension" priority="1" name="PLG_SYSTEM_HYPHENATEGHSVS">https://raw.githubusercontent.com/GHSVS-de/upadateservers/master/{{filename}}-update.xml</server></updateservers>
 
-	<updateservers><server type="extension" priority="1" name="PLG_SYSTEM_HYPHENATEGHSVS">https://raw.githubusercontent.com/GHSVS-de/upadateservers/master/hyphenateghsvs-update.xml</server></updateservers>
-	<changelogurl>https://raw.githubusercontent.com/GHSVS-de/upadateservers/master/hyphenateghsvs-changelog.xml</changelogurl>
+	<changelogurl>https://raw.githubusercontent.com/GHSVS-de/upadateservers/master/{{filename}}-changelog.xml</changelogurl>
+
+	<infourl>https://updates.ghsvs.de/changelog.php?file={{filename}}</infourl>
+
 	<scriptfile>installerScript.php</scriptfile>
 	<minimumPhp>{{minimumPhp}}</minimumPhp>
 	<maximumPhp>{{maximumPhp}}</maximumPhp>
@@ -24,7 +26,7 @@
 	<allowDowngrades>{{allowDowngrades}}</allowDowngrades>
 
 	<files>
-		<filename plugin="hyphenateghsvs">hyphenateghsvs.php</filename>
+		<filename plugin="{{filename}}">{{filename}}.php</filename>
 		<filename>helper.php</filename>
 		<filename>installerScript.php</filename>
 		<filename>LICENSE.txt</filename>
@@ -36,17 +38,17 @@
 		<folder>myforms</folder>
 	</files>
 
-	<media folder="media" destination="plg_system_hyphenateghsvs">
+	<media folder="media" destination="{{name}}">
 		<folder>css</folder>
-		<folder>js</folder>
 		<folder>images</folder>
+		<folder>js</folder>
 	</media>
 
 	<config>
-		<fields name="params" addfieldpath="plugins/system/hyphenateghsvs/fields">
+		<fields name="params" addfieldpath="plugins/system/{{filename}}/fields">
 
 			<fieldset name="basic">
-				<field type="hidden" default="1" name="hyphenateghsvsplugin" />
+				<field type="hidden" default="1" name="{{filename}}plugin" />
 
 				<field name="frontendonWarning" type="plgSystemHyphenateGhsvs.longdescription"
 					descriptiontext="PLG_SYSTEM_HYPHENATEGHSVS_FRONTENDON_WARNING"
