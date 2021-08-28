@@ -1,11 +1,39 @@
 {
 	"name": "plg_system_hyphenateghsvs",
-	"version": "2021.08.26",
+	"nameReal": "plg_system_hyphenateghsvs",
+	"filename": "hyphenateghsvs",
+	"version": "2021.08.28",
+	"versionCompare": "2020.08.30",
+	"update": {
+		"type": "plugin",
+		"folder": "system",
+		"client": "site",
+		"tag": "stable",
+		"targetplatform": ".*"
+	},
+	"releaseTxt": {
+		"title": "Joomla system plugin HyphenateGhsvs"
+	},
+	"changelog": {
+		"projecturl": "https://github.com/GHSVS-de/plg_system_hyphenateghsvs",
+		"infosDE": "",
+		"infosEN": "https://github.com/GHSVS-de/plg_system_hyphenateghsvs#readme",
+		"docsDE": "https://ghsvs.de/programmierer-schnipsel/joomla/191-joomla-silbentrennungs-plugin-hyphenateghsvs-fuer-doofe-browser",
+		"docsEN": "",
+		"lastTests": [
+			"PHP8",
+			"J10.0.0",
+			"J4.0.0"
+		]
+	},
 	"minimumPhp": "7.0.0",
 	"maximumPhp": "",
 	"minimumJoomla": "3.9.0",
 	"maximumJoomla": "4.9999.9999",
 	"allowDowngrades": "1",
+	"creationDate": "2016-02-28",
+	"licenseLong": "GNU General Public License version 3 or later; see LICENSE.txt.",
+	"copyright": "(C) 2016, G@HService Berlin Neukölln, Volkmar Volli Schlothauer (ghsvs.de)",
 	"author": {
 		"name": "G@HService Berlin Neukölln, Volkmar Volli Schlothauer",
 		"email": "",
@@ -29,7 +57,7 @@
 		"hyphenator"
 	],
 	"private": false,
-	"description": "Joomla plugin. Hyphenation for browsers that do NOT support CSS property hyphens or do not support languages you selected in this plugin.",
+	"description": "Joomla system plugin. Hyphenation for browsers that do NOT support CSS property hyphens or do not support some languages.",
 	"license": "GPL-3.0",
 	"repository": {
 		"type": "git",
@@ -46,7 +74,6 @@
 	"devDependencies": {
 		"adm-zip": "0.5.5",
 		"chalk": "^4.1.2",
-		"commander": "^8.1.0",
 		"fs-extra": "10.0.0",
 		"path": "^0.12.7",
 		"recursive-readdir": "^2.2.2",
