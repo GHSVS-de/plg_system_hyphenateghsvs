@@ -31,7 +31,7 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 		$files = array();
 
 		$deletePrefix = '/media/plg_system_hyphenateghsvs/js/hyphenopoly';
-		
+
 		// hpb files replaced with wasm files since version 2020.07.03.
 		$patternsPath = JPATH_SITE . $deletePrefix . '/patterns/';
 
@@ -41,12 +41,12 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 				$filter = '\.hpb$'
 			);
 		}
-		
+
 		foreach ($files as $file)
 		{
 			$this->deleteFiles[] = $deletePrefix . '/patterns/' . $file;
 		}
-		
+
 		$this->deleteFiles[] = $deletePrefix . '/hyphenEngine.asm.js';
 		$this->deleteFiles[] = $deletePrefix . '/hyphenEngine.wasm';
 		$this->deleteFiles[] = $deletePrefix . '/hyphenopoly.module.js';
@@ -56,13 +56,13 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 		$this->deleteFiles[] = $deletePrefix . '/-uncompressed/prepros-6.config';
 		$this->deleteFiles[] = $deletePrefix . '/-uncompressed/prepros.config';
 		$this->deleteFiles[] = $deletePrefix . '/_version2.7.0/index.html';
-		
+
 		$this->deleteFiles[] =
 			str_replace(
 				JPATH_SITE, '',
 				Factory::getApplication()->get('log_path') . '/plg_system_hyphenateghsvs-log.txt'
 			);
-			
+
 			$this->deleteFolders[] = $deletePrefix . '/_version2.7.0';
 	}
 
@@ -94,7 +94,7 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 				if ($maximumPhp && version_compare(PHP_VERSION, $maximumPhp, '>'))
 				{
 					$msg = 'Your PHP version (' . PHP_VERSION . ') is too high for this extension. Maximum PHP version is: ' . $maximumPhp . '.';
-	
+
 					Log::add($msg, Log::WARNING, 'jerror');
 				}
 
@@ -104,12 +104,12 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 				}
 			}
 
-			if (trim((string) $manifest->allowDowngrades))
+			if ((int) $manifest->allowDowngrades === 1)
 			{
 				$this->allowDowngrades = true;
 			}
 		}
-		
+
 		if (!parent::preflight($type, $parent))
 		{
 			return false;
