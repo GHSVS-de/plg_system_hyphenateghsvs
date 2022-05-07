@@ -31,6 +31,16 @@ use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\CMS\Uri\Uri;
 use Joomla\Registry\Registry;
 
+/*
+Bugfix for Joomla 4, at least with Cassiopeia.
+Register helper early. Under some weird circumstances you can get an error
+"Class "PlgHyphenateGhsvsHelper" not found".
+For example when you remove the snippet
+"<jdoc:include type="metas" />"
+in template's index.php.
+*/
+JLoader::register('PlghyphenateghsvsHelper', __DIR__ . '/helper.php');
+
 class PlgSystemhyphenateghsvs extends CMSPlugin
 {
 	protected $app;
@@ -171,7 +181,6 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 			$doc->addCustomTag('<style>' . $add_hypenate_css . '</style>');
 		}
 
-		JLoader::register('PlghyphenateghsvsHelper', __DIR__ . '/helper.php');
 		$hyphenate     = PlghyphenateghsvsHelper::prepareSelectors($this->params->get('hyphenate', ''));
 		$donthyphenate = PlghyphenateghsvsHelper::prepareSelectors($this->params->get('donthyphenate', ''));
 
@@ -228,9 +237,9 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 					Uri::root(true) . '/media/' . self::$basepath . '/js/hyphenopoly/' . $this->uncompressed . '/',
 					'/'
 				);
-			
+
 			$this->setup['hide'] = $this->params->get('setup_hide', 'all');
-			
+
 			if (!$this->cleanup)
 			{
 				$hyphenopolyInit = $this->getHyphenopolyInit();
