@@ -72,6 +72,18 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 	// Marker in params to identify myself in back-end.
 	private $meMarker = '"hyphenateghsvsplugin":"1"';
 
+	// Make csp_nonce of HTTP Header plugin available via JS.
+	private $nonce = '';
+
+	public function onAfterDispatch()
+	{
+		// Set by Http-Header-plugin?
+		if ($this->nonce = $this->app->get('csp_nonce', ''))
+		{
+			$this->nonce = ' nonce="' . $this->nonce . '"';
+		}
+	}
+
 	public function onAfterRender()
 	{
 		if ($this->goOn() && $this->cleanup)
@@ -118,15 +130,15 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 				// Leave $this->require untouched.
 				elseif ($this->cleanup === 1)
 				{
-					$replaceWith  = '<script>' . $this->getHyphenopolyInit() . '</script>';
-					$replaceWith .= '<script src="' . $this->getHyphenopolyLink() . '"></script>';
+					$replaceWith  = '<script' . $this->nonce . '>' . $this->getHyphenopolyInit() . '</script>';
+					$replaceWith .= '<script' . $this->nonce . ' src="' . $this->getHyphenopolyLink() . '"></script>';
 				}
 			}
 			else
 			{
 				$this->require = $required;
-				$replaceWith  = '<script>' . $this->getHyphenopolyInit() . '</script>';
-				$replaceWith .= '<script src="' . $this->getHyphenopolyLink() . '"></script>';
+				$replaceWith  = '<script' . $this->nonce . '>' . $this->getHyphenopolyInit() . '</script>';
+				$replaceWith .= '<script' . $this->nonce . ' src="' . $this->getHyphenopolyLink() . '"></script>';
 			}
 
 			// Insert or remove scripts.
@@ -178,7 +190,7 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 			$add_hypenate_css = file_get_contents(
 				JPATH_SITE . '/media/' . self::$basepath . '/css/hyphenate.min.css'
 			);
-			$doc->addCustomTag('<style>' . $add_hypenate_css . '</style>');
+			$doc->addCustomTag('<style' . $this->nonce . '>' . $add_hypenate_css . '</style>');
 		}
 
 		$hyphenate     = PlghyphenateghsvsHelper::prepareSelectors($this->params->get('hyphenate', ''));
