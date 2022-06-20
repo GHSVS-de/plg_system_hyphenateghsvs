@@ -40,7 +40,7 @@ let versionSub = '';
 	];
 	await helper.cleanOut(cleanOuts);
 
-	versionSub = await helper.findVersionSub (
+	versionSub = await helper.findVersionSubSimple (
 		path.join(__dirname, source, `package.json`),
 		'Hyphenopoly');
 	console.log(pc.magenta(pc.bold(`versionSub identified as: "${versionSub}"`)));
