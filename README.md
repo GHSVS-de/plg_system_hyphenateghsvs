@@ -23,13 +23,25 @@ This Joomla plugin...
 ...provides new Hyphenopoly JavaScript library from https://github.com/mnater/Hyphenopoly programmed by Mathias Nater (mnater).
 
 # My personal build procedure (WSL 1, Debian, Win 10)
+
+**@since v2022.06.22: Build procedure uses local repo fork of https://github.com/GHSVS-de/buildKramGhsvs**
+
 - Prepare/adapt `./package.json`.
 - `cd /mnt/z/git-kram/plg_system_hyphenateghsvs`
 
 ## node/npm updates/installation
-- `npm run g-npm-update-check` or (faster) `ncu`
-- `npm run g-ncu-override-json` (if needed) or (faster) `ncu -u`
-- `npm install` (if needed)
+- `npm install` (if never done before)
+
+### Update dependencies
+- `npm run updateCheck` or (faster) `npm outdated`
+- `npm run update` (if needed) or (faster) `npm update --save-dev`
+
+## PHP Codestyle
+If you think it's worth it.
+- `cd /mnt/z/git-kram/php-cs-fixer-ghsvs`
+- `npm run plg_system_hyphenateghsvsDry` (= dry test run).
+- `npm run plg_system_hyphenateghsvs` (= cleans code).
+- `cd /mnt/z/git-kram/plg_system_hyphenateghsvs` (back to this repo).
 
 ## Build installable ZIP package
 - `node build.js`
