@@ -168,6 +168,8 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 				->where($db->qn('location') . ' = '
 					. $db->q('https://raw.githubusercontent.com/GHSVS-de/upadateservers/master/plg_system_hyphenateghsvs_changelog.xml'), 'OR')
 				->where($db->qn('location') . ' = '
+					. $db->q('https://raw.githubusercontent.com/GHSVS-de/upadateservers/master/hyphenateghsvs-update.xml'), 'OR')
+				->where($db->qn('location') . ' = '
 					. $db->q('https://snapshots.ghsvs.de/updates/joomla/plg_system_hyphenateghsvs.xml'), 'OR')
 				->where($db->qn('location') . ' = '
 					. $db->q('http://snapshots.ghsvs.de/updates/joomla/plg_system_hyphenateghsvs.xml'));
