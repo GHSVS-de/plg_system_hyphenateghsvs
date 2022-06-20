@@ -20,15 +20,15 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\Filesystem\Folder;
 use Joomla\CMS\Installer\InstallerScript;
 use Joomla\CMS\Log\Log;
-use Joomla\CMS\Filesystem\Folder;
 
 class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 {
 	public function __construct()
 	{
-		$files = array();
+		$files = [];
 
 		$deletePrefix = '/media/plg_system_hyphenateghsvs/js/hyphenopoly';
 
@@ -37,7 +37,8 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 
 		if (is_dir($patternsPath))
 		{
-			$files = Folder::files($patternsPath,
+			$files = Folder::files(
+				$patternsPath,
 				$filter = '\.hpb$'
 			);
 		}
@@ -59,11 +60,12 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 
 		$this->deleteFiles[] =
 			str_replace(
-				JPATH_SITE, '',
+				JPATH_SITE,
+				'',
 				Factory::getApplication()->get('log_path') . '/plg_system_hyphenateghsvs-log.txt'
 			);
 
-			$this->deleteFolders[] = $deletePrefix . '/_version2.7.0';
+		$this->deleteFolders[] = $deletePrefix . '/_version2.7.0';
 	}
 
 	public function preflight($type, $parent)
@@ -128,7 +130,6 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 		$this->removeFiles();
 	}
 
-
 	/**
 	 * Runs right after any installation action is preformed on the component.
 	 *
@@ -158,6 +159,7 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 	protected function removeOldUpdateservers()
 	{
 		$db = Factory::getDbo();
+
 		try
 		{
 			$query = $db->getQuery(true);
@@ -177,7 +179,7 @@ class plgSystemHyphenateGhsvsInstallerScript extends InstallerScript
 				return;
 			}
 
-			$ids = \array_keys($ids);
+			$ids = array_keys($ids);
 			$ids = implode(',', $ids);
 
 			// Delete from update sites

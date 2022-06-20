@@ -18,23 +18,30 @@ class PlgHyphenateGhsvsHelper
 {
 	public static function prepareSelectors($string)
 	{
-		if (!trim($string)) return '';
-		
+		if (!trim($string))
+		{
+			return '';
+		}
+
 		$filter = InputFilter::getInstance();
 		$string = array_unique(preg_split("/(\n|\r)+/", $filter->clean($string, 'TRIM')));
-		
-		if (!$string) return '';
+
+		if (!$string)
+		{
+			return '';
+		}
 
 		foreach ($string as $key => $selector)
 		{
-			$string[$key] = str_replace(array('"', "'"), '', $filter->clean($selector, 'TRIM'));
+			$string[$key] = str_replace(['"', "'"], '', $filter->clean($selector, 'TRIM'));
+
 			if (!$string[$key])
 			{
 				unset($string[$key]);
 				continue;
 			}
 		}
-		
+
 		return implode(', ', array_unique($string));
 	}
 
@@ -71,7 +78,7 @@ class PlgHyphenateGhsvsHelper
 					// B\C Hyphenator:
 					&& !is_numeric($lang)
 					&& ($langtext = str_replace(' ', '', $language->get('langtext', '')))
-				){
+				) {
 					if ($isHypenopoly && ($langTag = trim($language->get('langTag', ''))))
 					{
 						$require[$langTag] = $langtext;
@@ -84,10 +91,10 @@ class PlgHyphenateGhsvsHelper
 				}
 			}
 		}
-		
+
 		$require = array_change_key_case($require, CASE_LOWER);
 		$fallbacks = array_change_key_case($fallbacks, CASE_LOWER);
-		
+
 		return !empty($require);
 	}
 
@@ -97,7 +104,7 @@ class PlgHyphenateGhsvsHelper
 		{
 			$data = PlgSystemHyphenateGhsvs::removeJPATH_SITE(strip_tags($data));
 
-			$lines = array();
+			$lines = [];
 
 			if (is_file($logFile))
 			{

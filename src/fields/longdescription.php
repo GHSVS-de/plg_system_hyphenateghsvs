@@ -56,14 +56,14 @@ class plgSystemHyphenateGhsvsFormFieldLongDescription extends FormField
 	protected $renderLayout = 'ghsvs.renderfield';
 
 	protected $myLayoutPath = 'plugins/system/hyphenateghsvs/layouts';
-	
+
 	protected $myLanguagePath = 'plugins/system/hyphenateghsvs/language';
 
 	// Zeigt Render-Pfade der Felder-Layouts, if TRUE.
 	protected $debugLayouts = false;
-	
+
 	protected static $loaded;
-	
+
 	protected function getInput()
 	{
 		$additionalClass = isset($this->element['additionalClass'])
@@ -74,10 +74,10 @@ class plgSystemHyphenateGhsvsFormFieldLongDescription extends FormField
 		$contentToggler = $this->element['contentToggler'] ?? '';
 
 		$additionalClass = !$contentToggler ?: $additionalClass . ' withContentToggler';
-		
+
 		$contentTogglerLabel = isset($this->element['contentTogglerLabel'])
 			? (string) $this->element['contentTogglerLabel'] : 'PLG_HYPHENATEGHSVS_SHOW_HIDE_BUTTON';
-		
+
 		$contentTogglerLabel = Text::_($contentTogglerLabel);
 
 		// Easier handling for License texts etc.:
@@ -93,25 +93,27 @@ class plgSystemHyphenateGhsvsFormFieldLongDescription extends FormField
 
 					if (strpos($no_nl[0], '/') === 0)
 					{
-					 $content = file_get_contents(JPATH_SITE . '/' . $no_nl[0]);
+						$content = file_get_contents(JPATH_SITE . '/' . $no_nl[0]);
 					}
 					else
 					{
 						$lang = Factory::getLanguage();
-						$paths = array(
+						$paths = [
 							JPATH_SITE . '/' . $this->myLanguagePath . '/' . $lang->getTag(),
 							JPATH_SITE . '/' . $this->myLanguagePath . '/' . $lang->getDefault(),
-						);
+						];
+
 						foreach ($paths as $path)
 						{
 							$path .= '/' . $no_nl[0];
+
 							if (false !== ($content = @file_get_contents($path)))
 							{
 								break;
 							}
 						}
 					}
-					
+
 					// No trailing : means do nl2br.
 					if (!isset($no_nl[1]))
 					{
@@ -123,6 +125,7 @@ class plgSystemHyphenateGhsvsFormFieldLongDescription extends FormField
 		}
 
 		$headline = '';
+
 		if (strpos($descriptiontext, '{HEAD-LINE:') !== false)
 		{
 			preg_match('/{HEAD-LINE:([^}]+)}/', $descriptiontext, $matches);
@@ -135,20 +138,20 @@ class plgSystemHyphenateGhsvsFormFieldLongDescription extends FormField
 		}
 		unset($matches);
 
-		$html = array('<div class="longdesription descriptiontext ' . $additionalClass . '">');
+		$html = ['<div class="longdesription descriptiontext ' . $additionalClass . '">'];
 		$html[] = $headline;
 
 		if ($contentToggler)
 		{
 			$target = $this->id . 'contentToggler';
-			
+
 			$html[] = '<button type=button class=contentToggler data-togglerContent=' . $target . '>';
 			$html[] = $contentTogglerLabel;
 			$html[] = '</button>';
 			$html[] = '<div class=togglerContent id=' . $target . '>';
 		}
 		$html[] = $descriptiontext;
-		
+
 		if ($contentToggler)
 		{
 			$html[] = '</div>';
@@ -157,7 +160,7 @@ class plgSystemHyphenateGhsvsFormFieldLongDescription extends FormField
 
 		if ($contentToggler && !self::$loaded)
 		{
-			$js = str_replace(array("\n", "\t"), '', ';document.addEventListener("click", function(event)
+			$js = str_replace(["\n", "\t"], '', ';document.addEventListener("click", function(event)
 {
 	var element = event.target;
 	if (!element.classList.contains("contentToggler")) return;
@@ -168,7 +171,7 @@ class plgSystemHyphenateGhsvsFormFieldLongDescription extends FormField
 		content.classList.toggle("isVisible");
 	}
 }, false);');
-			$css = str_replace(array("\n", "\t", " "), '', '.togglerContent
+			$css = str_replace(["\n", "\t", " "], '', '.togglerContent
 {
 	display: none;
 }
@@ -182,10 +185,10 @@ class plgSystemHyphenateGhsvsFormFieldLongDescription extends FormField
 			$document->addStyleDeclaration($css);
 			self::$loaded = 1;
 		}
-		
+
 		return implode('', $html);
 	}
-	
+
 	/**
 	 * Allow to override renderer include paths in child fields
 	 *
@@ -195,7 +198,7 @@ class plgSystemHyphenateGhsvsFormFieldLongDescription extends FormField
 	 */
 	public function getLayoutPaths()
 	{
-		$customPaths = array(JPATH_SITE . '/' . $this->myLayoutPath);
+		$customPaths = [JPATH_SITE . '/' . $this->myLayoutPath];
 
 		$defaultPaths = new FileLayout('');
 		$defaultPaths = $defaultPaths->getDefaultIncludePaths();

@@ -44,30 +44,43 @@ JLoader::register('PlghyphenateghsvsHelper', __DIR__ . '/helper.php');
 class PlgSystemhyphenateghsvs extends CMSPlugin
 {
 	protected $app;
+
 	protected $autoloadLanguage = true;
+
 	protected static $basepath = 'plg_system_hyphenateghsvs';
 
-	protected $require = array();
-	protected $fallbacks = array();
-	protected $setup = array();
-	protected $paths = array();
-	protected $handleEvent = array();
+	protected $require = [];
+
+	protected $fallbacks = [];
+
+	protected $setup = [];
+
+	protected $paths = [];
+
+	protected $handleEvent = [];
 
 	protected $uncompressed = null;
+
 	protected $execute = null;
+
 	protected $isHyphenopoly = null;
+
 	protected $log = null;
+
 	protected $logFile = null;
+
 	protected $cleanup = null;
+
 	protected $cleanupMarker = '<meta name=!hyphenopolyInit! content=!INITHYPHENOPOLYHERE!>';
+
 	protected $prettyPrint = null;
 
 	// Subforms with fields to clean by filter="something" when saving.
-	private $usedSubforms = array(
+	private $usedSubforms = [
 		// subformFieldName => xml file (without .xml)
 		'languages' => 'languages-subform',
-		'languageshyphenopoly' => 'languages-subform-hyphenopoly'
-	);
+		'languageshyphenopoly' => 'languages-subform-hyphenopoly',
+	];
 
 	// Marker in params to identify myself in back-end.
 	private $meMarker = '"hyphenateghsvsplugin":"1"';
@@ -89,10 +102,10 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 		if ($this->goOn() && $this->cleanup)
 		{
 			// found lang tags in document body.
-			$usedLangsInPage = array();
+			$usedLangsInPage = [];
 
 			// Lang tags that are really required (compare $usedLangsInPage with configuration).
-			$required = array();
+			$required = [];
 
 			$buffer = $this->app->getBody();
 			$Doc = new DOMDocument('1.0', 'UTF-8');
@@ -148,12 +161,13 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 			if ($this->log && ($usedLangsInPage || !$required))
 			{
 				$uri = Uri::getInstance();
-				$uri = $uri->toString(array('path', 'query', 'fragment'));
+				$uri = $uri->toString(['path', 'query', 'fragment']);
 
 				if ($usedLangsInPage)
 				{
 					sort($usedLangsInPage);
-					$data = Text::sprintf('PLG_HYPHENATEGHSVS_LOG_LANG_TAG_FOUND_BUT_NOT_LOADED',
+					$data = Text::sprintf(
+						'PLG_HYPHENATEGHSVS_LOG_LANG_TAG_FOUND_BUT_NOT_LOADED',
 						implode(', ', $usedLangsInPage),
 						$uri
 					);
@@ -165,7 +179,8 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 					$merged = array_unique(array_merge(array_keys($this->require), array_keys($this->fallbacks)));
 					sort($merged);
 
-					$data = Text::sprintf('PLG_HYPHENATEGHSVS_LOG_CLEANUP_RETURNS_EMPTY_REQUIRED',
+					$data = Text::sprintf(
+						'PLG_HYPHENATEGHSVS_LOG_CLEANUP_RETURNS_EMPTY_REQUIRED',
 						implode(', ', $merged),
 						$uri,
 						$this->cleanup === 2 ? 'Hyphenopoly configuration script removed.' : 'Uncleaned Hyphenopoly configuration script (= like configured by you) inserted.'
@@ -204,6 +219,7 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 				PlgHyphenateGhsvsHelper::log($this->logFile, $data);
 			}
 			$this->goOn(true, false);
+
 			return;
 		}
 
@@ -212,7 +228,10 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 
 		// Prepare $this->require and $this->fallbacks
 		$hasFound = PlgHyphenateGhsvsHelper::getRequiredAndFallback(
-			$this->isHyphenopoly, $this->params, $this->require, $this->fallbacks
+			$this->isHyphenopoly,
+			$this->params,
+			$this->require,
+			$this->fallbacks
 		);
 
 		$hyphenatorLoaderInit = $hyphenopolyInit = '';
@@ -223,13 +242,13 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 			// useCSS3hyphenation : true macht keinen Sinn, wenn Hyphenate_Loader sowieso nur in Browsern
 			// lädt, die gar kein CSS3hyphenation unterstützen!
 			// defaultlanguage : "de", rausgenommen, da unklar.
-			$config = json_encode(array(
+			$config = json_encode([
 				'useCSS3hyphenation' => false,
 				'intermediatestate' => 'visible',
 				// default:local (bis der Browser schließt), session (Storage pro Fenster)
 				// Only for Network debug: none
 				// 'storagetype' => 'none',
-			));
+			]);
 
 			$path = Uri::root(true) . '/media/' . self::$basepath . '/js/Hyphenator' . $this->uncompressed . '.js';
 			$hyphenatorLoaderInit = 'Hyphenator_Loader.init(' . json_encode($this->require) . ', "' . $path . '",' . $config . ');';
@@ -265,7 +284,7 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 
 		// Build and include basic JS that adds classes hyphenate and donthyphenate.
 		// If an init() script snippet exists include it here, too.
-		$js = array();
+		$js = [];
 
 		if (!$vanilla)
 		{
@@ -292,9 +311,10 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 		{
 			$file = self::$basepath . '/hyphenateghsvsVanilla' . $this->uncompressed . '.js';
 
-			HTMLHelper::_('script',
+			HTMLHelper::_(
+				'script',
 				$file,
-				array('relative' => true, 'version' => $version)
+				['relative' => true, 'version' => $version]
 			);
 
 			$js[] = ';document.addEventListener("DOMContentLoaded", function(){';
@@ -326,19 +346,21 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 				PlgHyphenateGhsvsHelper::log($this->logFile, $data);
 			}
 			$this->goOn(true, false);
+
 			return;
 		}
 		elseif ($this->isHyphenopoly === false)
 		{
 			$file = self::$basepath . '/Hyphenator_Loader' . $this->uncompressed . '.js';
-			HTMLHelper::_('script',
+			HTMLHelper::_(
+				'script',
 				$file,
-				array('version' => $version, 'relative' => true)
+				['version' => $version, 'relative' => true]
 			);
 		}
 	}
 
-	public function onExtensionBeforeSave($context, $table, $isNew, $data = array())
+	public function onExtensionBeforeSave($context, $table, $isNew, $data = [])
 	{
 		// Sanitize subform fields.
 		if (
@@ -348,16 +370,16 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 			&& strpos($table->params, $this->meMarker) !== false
 			//&& $table->enabled
 			&& !empty($this->usedSubforms)
-		){
+		) {
 			$do = false;
-			$excludeTypes = array(
+			$excludeTypes = [
 				//'filelist'
-			);
+			];
 			$inputFilter = InputFilter::getInstance();
 
 			foreach ($this->usedSubforms as $fieldName => $file)
 			{
-				$cleans = array();
+				$cleans = [];
 				$params = new Registry($table->params);
 				$subformData = $params->get($fieldName);
 				$file = __DIR__ . '/myforms/' . $file . '.xml';
@@ -365,8 +387,7 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 				if (
 					!is_object($subformData) || !count(get_object_vars($subformData))
 					|| !is_file($file)
-				)
-				{
+				) {
 					continue;
 				}
 
@@ -432,7 +453,7 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 					&& !$this->params->get('frontendon', 0))
 				|| (!$this->params->get('robots', 0) && $this->app->client->robot)
 				|| $this->app->getDocument()->getType() !== 'html'
-			){
+			) {
 				$this->execute = false;
 			}
 			else
@@ -470,9 +491,9 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 
 	protected function getHyphenopolyInit()
 	{
-		$Hyphenoply = array('require' => $this->require);
+		$Hyphenoply = ['require' => $this->require];
 
-		$dos = array('fallbacks', 'paths', 'handleEvent', 'setup');
+		$dos = ['fallbacks', 'paths', 'handleEvent', 'setup'];
 
 		foreach ($dos as $do)
 		{
@@ -482,14 +503,15 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 			}
 		}
 
-		$Hyphenoply = json_encode($Hyphenoply,
+		$Hyphenoply = json_encode(
+			$Hyphenoply,
 			$this->prettyPrint
 			| JSON_UNESCAPED_SLASHES
 			| JSON_UNESCAPED_UNICODE
 		);
 
 		// Remove quotes around handleEvent functions:
-		$Hyphenoply = ';var Hyphenopoly = ' . str_replace(array('"||||', '||||"'), '', $Hyphenoply) .';';
+		$Hyphenoply = ';var Hyphenopoly = ' . str_replace(['"||||', '||||"'], '', $Hyphenoply) . ';';
 
 		return $Hyphenoply;
 	}
@@ -532,7 +554,7 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 		{
 			$html = Text::sprintf('PLG_SYSTEM_HYPHENATEGHSVS_BUTTON_FILE_DELETE_SUCCESS', $file);
 		}
-		echo json_encode(array('html' => $html));
+		echo json_encode(['html' => $html]);
 	}
 
 	/**
@@ -551,13 +573,13 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 
 		if ($file === false || !trim($file))
 		{
-			$html = Text::sprintf('PLG_SYSTEM_HYPHENATEGHSVS_BUTTON_FILE_SHOW_CONTENT_EMPTY', $filePath);;
+			$html = Text::sprintf('PLG_SYSTEM_HYPHENATEGHSVS_BUTTON_FILE_SHOW_CONTENT_EMPTY', $filePath);
 		}
 		else
 		{
 			$html = '** CONTENT OF FILE ' . $filePath . " **\n\n" . $file;
 		}
-		echo json_encode(array('html' => $html));
+		echo json_encode(['html' => $html]);
 	}
 
 	/**
@@ -585,8 +607,8 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 			$download = JUri::root() . '/' . ltrim($file, '/');
 			$download = '<a href=' . $download . ' target=_blank download>Download</a>';
 		}
-		echo json_encode(array('html' => 'Path: ' . $file . "\nSize: " . $filesize
-			. "\nDownload: " . (isset($download) ? $download : 'No file found')));
+		echo json_encode(['html' => 'Path: ' . $file . "\nSize: " . $filesize
+			. "\nDownload: " . (isset($download) ? $download : 'No file found'), ]);
 	}
 
 	private function isAjaxAllowed()

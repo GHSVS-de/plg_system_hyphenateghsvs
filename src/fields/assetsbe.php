@@ -32,40 +32,43 @@ class plgSystemHyphenateGhsvsFormFieldAssetsBe extends FormField
 
 		$loadcss = isset($this->element['loadcss'])
 			? (string) $this->element['loadcss'] : true;
-	
+
 		$file = 'plg_system_hyphenateghsvs/backend';
-		
+
 		if ($loadcss !== 'false')
 		{
-			HTMLHelper::_('stylesheet',
+			HTMLHelper::_(
+				'stylesheet',
 				$file . '.css',
-				array(
+				[
 					//Allow template overrides in css/plg_system_charactercounterghsvs:
 					'relative' => true,
 					//'pathOnly' => false,
 					//'detectBrowser' => false,
 					//'detectDebug' => true,
-				)
+				]
 			);
 		}
 
 		if ($loadjs !== 'false')
 		{
 			HTMLHelper::_('jquery.framework');
-			HTMLHelper::_('script',
+			HTMLHelper::_(
+				'script',
 				$file . '.js',
-				array(
+				[
 					//Allow template overrides in css/plg_system_charactercounterghsvs:
 					'relative' => true,
 					//'pathOnly' => false,
 					//'detectBrowser' => false,
 					//'detectDebug' => true,
-				)
+				]
 			);
 		}
+
 		return '';
 	}
-	
+
 	protected function getLabel()
 	{
 		return '';

@@ -20,15 +20,16 @@ defined('JPATH_PLATFORM') or die;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Form\FormField;
 use Joomla\CMS\HTML\HTMLHelper;
-use Joomla\CMS\Layout\FileLayout;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Layout\FileLayout;
 use Joomla\CMS\Plugin\PluginHelper;
 
 class plgSystemHyphenateGhsvsFormFieldLogButtons extends FormField
 {
 	protected $type = 'logbuttons';
-	
+
 	protected $renderLayout = 'ghsvs.renderfield';
+
 	protected $myLayoutPath = 'plugins/system/hyphenateghsvs/layouts';
 
 	protected function getInput()
@@ -38,39 +39,43 @@ class plgSystemHyphenateGhsvsFormFieldLogButtons extends FormField
 		if (PluginHelper::isEnabled('system', 'hyphenateghsvs'))
 		{
 			HTMLHelper::_('behavior.core');
-			$files = array(
+			$files = [
 				'buttons-ajax.js',
 				'log-buttons.js',
-			);
-			
+			];
+
 			foreach ($files as $file)
 			{
-				HTMLHelper::_('script',
+				HTMLHelper::_(
+					'script',
 					'plg_system_hyphenateghsvs/' . $file,
-					array(
+					[
 						'relative' => true,
-						'version' => 'auto'
-					),
-					array(
-						'defer' => true
-					)
+						'version' => 'auto',
+					],
+					[
+						'defer' => true,
+					]
 				);
 			}
 
 			Factory::getDocument()->addScriptOptions(
 				'plg_system_hyphenateghsvs',
-				array(
+				[
 					'ajaxError' => Text::sprintf(
-						'PLG_SYSTEM_HYPHENATEGHSVS_AJAX_ERROR'),
+						'PLG_SYSTEM_HYPHENATEGHSVS_AJAX_ERROR'
+					),
 					'bePatient' => Text::sprintf(
-						'PLG_SYSTEM_HYPHENATEGHSVS_BE_PATIENT')
-					
-				)
+						'PLG_SYSTEM_HYPHENATEGHSVS_BE_PATIENT'
+					),
+
+				]
 			);
 		}
 		else
 		{
 			$offHint = Text::_('PLG_SYSTEM_HYPHENATEGHSVS_BUTTONS_INACTIVE');
+
 			return $offHint;
 		}
 
@@ -88,9 +93,10 @@ class plgSystemHyphenateGhsvsFormFieldLogButtons extends FormField
 			<div class=ajaxOutput></div>
 		</div>';
 	}
+
 	public function getLayoutPaths()
 	{
-		$customPaths = array(JPATH_SITE . '/' . $this->myLayoutPath);
+		$customPaths = [JPATH_SITE . '/' . $this->myLayoutPath];
 
 		$defaultPaths = new FileLayout('');
 		$defaultPaths = $defaultPaths->getDefaultIncludePaths();
@@ -99,5 +105,4 @@ class plgSystemHyphenateGhsvsFormFieldLogButtons extends FormField
 
 		return array_merge($customPaths, $defaultPaths, $parentFieldPaths);
 	}
-	
 }

@@ -20,7 +20,6 @@ to get rid of this f**** <div class="controls">
 by using custom JLayout plugins/system/hyphenateghsvs/layouts/renderfield.php
 */
 
-
 defined('JPATH_PLATFORM') or die;
 
 use Joomla\CMS\Form\FormHelper;
@@ -33,6 +32,7 @@ class plgSystemHyphenateGhsvsFormFieldSubformLayout extends JFormFieldSubform
 	protected $type = 'subformlayout';
 
 	protected $renderLayout = 'ghsvs.renderfield';
+
 	protected $myLayoutPath = 'plugins/system/hyphenateghsvs/layouts';
 
 	// Debugge Render-Pfade der Felder-Layouts und Fehler:
@@ -47,7 +47,7 @@ class plgSystemHyphenateGhsvsFormFieldSubformLayout extends JFormFieldSubform
 	 */
 	public function getLayoutPaths()
 	{
-		$customPaths = array(JPATH_SITE . '/' . $this->myLayoutPath);
+		$customPaths = [JPATH_SITE . '/' . $this->myLayoutPath];
 
 		$defaultPaths = new FileLayout('');
 		$defaultPaths = $defaultPaths->getDefaultIncludePaths();
