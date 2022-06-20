@@ -7,16 +7,17 @@
 	<license>{{licenseLong}}</license>
 	<authorUrl>{{authorUrl}}</authorUrl>
 	<version>{{version}}</version>
-	<versionHistory>
-		https://updates.ghsvs.de/changelog.php?file=hyphenateghsvs
-	</versionHistory>
 	<description>{{nameUpper}}_XML_DESCRIPTION</description>
 
-	<updateservers><server type="extension" priority="1" name="PLG_SYSTEM_HYPHENATEGHSVS">https://raw.githubusercontent.com/GHSVS-de/upadateservers/master/{{filename}}-update.xml</server></updateservers>
+	<updateservers><server type="extension" priority="1" name="{{nameUpper}}">https://raw.githubusercontent.com/GHSVS-de/upadateservers/master/{{name}}-update.xml</server></updateservers>
 
-	<changelogurl>https://raw.githubusercontent.com/GHSVS-de/upadateservers/master/{{filename}}-changelog.xml</changelogurl>
+	<changelogurl>https://raw.githubusercontent.com/GHSVS-de/upadateservers/master/{{name}}-changelog.xml</changelogurl>
 
-	<infourl>https://updates.ghsvs.de/changelog.php?file={{filename}}</infourl>
+	<infourl>https://updates.ghsvs.de/changelog.php?file={{name}}</infourl>
+
+	<versionCompare>
+	https://github.com/GHSVS-de/{{name}}/compare/{{versionCompare}}...{{version}}
+	</versionCompare>
 
 	<scriptfile>installerScript.php</scriptfile>
 	<minimumPhp>{{minimumPhp}}</minimumPhp>
