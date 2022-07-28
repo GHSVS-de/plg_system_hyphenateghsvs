@@ -108,6 +108,14 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 			$required = [];
 
 			$buffer = $this->app->getBody();
+
+			// Fixes DOMDocument::loadHTML(): Argument #1 ($source) must not be empty
+			if (empty($buffer))
+			{
+				$this->execute = false;
+				return;
+			}
+
 			$Doc = new DOMDocument('1.0', 'UTF-8');
 			@$Doc->loadHTML($buffer);
 			$xpath = new DOMXPath($Doc);
