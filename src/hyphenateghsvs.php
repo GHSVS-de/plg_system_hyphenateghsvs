@@ -231,7 +231,7 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 			return;
 		}
 
-		$version = JDEBUG ? 'auto' : time();
+		$version = JDEBUG ? time() : 'auto';
 		$vanilla = (int) $this->params->get('vanilla', 0);
 
 		// Prepare $this->require and $this->fallbacks
