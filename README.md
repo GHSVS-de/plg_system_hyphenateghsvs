@@ -12,15 +12,16 @@ You'll find detailed descriptions of all configuration options inside the plugin
 ## Uses since release 2019.03.10 **recommended** Hyphenopoly.js (besides old Hyphenater.js for updaters)!
 https://github.com/GHSVS-de/plg_system_hyphenateghsvs/releases
 
-## Version history
-https://github.com/GHSVS-de/plg_system_hyphenateghsvs/wiki/Version-history-plg_system_hyphenateghsvs
+## DEUTSCH: Update-Hinweis für Versionen <= 2022.06.22
+
+## ENGLISCH: Update note for versions <= 2022.06.22
 
 ## Thanks
 This Joomla plugin...
 
-...provides old Hyphenator JavaScript library from https://github.com/mnater/Hyphenator programmed by Mathias Nater (mnater).
+...provides old Hyphenator JavaScript library from https://github.com/mnater/Hyphenator programmed by Mathias Nater (mnater) (**Only versions up to version 2022.06.22 of this Joomla plugin**).
 
-...provides new Hyphenopoly JavaScript library from https://github.com/mnater/Hyphenopoly programmed by Mathias Nater (mnater).
+...provides newer Hyphenopoly JavaScript library from https://github.com/mnater/Hyphenopoly programmed by Mathias Nater (mnater).
 
 # My personal build procedure (WSL 1, Debian, Win 10)
 
