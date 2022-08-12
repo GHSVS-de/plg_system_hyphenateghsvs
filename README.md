@@ -9,7 +9,7 @@ You can report issues, ask questions in english or german: https://github.com/GH
 ## Description/Documentation
 You'll find detailed descriptions of all configuration options inside the plugin after installation.
 
-## Uses since release 2019.03.10 **recommended** Hyphenopoly.js (besides old Hyphenater.js for updaters)!
+## Uses since release 2019.03.10 **recommended** Hyphenopoly.js.
 https://github.com/GHSVS-de/plg_system_hyphenateghsvs/releases
 
 ## DEUTSCH: Update-Hinweis für Versionen <= 2022.06.22
