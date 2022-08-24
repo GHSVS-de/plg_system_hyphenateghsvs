@@ -282,7 +282,7 @@ class PlgSystemhyphenateghsvs extends CMSPlugin
 			if (!$this->cleanup)
 			{
 				$hyphenopolyInit = $this->getHyphenopolyInit();
-				$doc->addCustomTag('<script src="' . $this->getHyphenopolyLink() . '"></script>');
+				$doc->addCustomTag('<script' . $this->nonce . ' src="' . $this->getHyphenopolyLink() . '"></script>');
 			}
 			else
 			{
