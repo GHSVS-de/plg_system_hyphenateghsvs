@@ -15,7 +15,7 @@ Usage:
 
 Inserts Ajax-Buttons for Log File.
 */
-defined('JPATH_PLATFORM') or die;
+defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Form\FormField;

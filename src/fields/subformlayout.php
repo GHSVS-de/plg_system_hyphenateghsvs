@@ -20,7 +20,7 @@ to get rid of this f**** <div class="controls">
 by using custom JLayout plugins/system/hyphenateghsvs/layouts/renderfield.php
 */
 
-defined('JPATH_PLATFORM') or die;
+defined('_JEXEC') or die;
 
 use Joomla\CMS\Form\FormHelper;
 use Joomla\CMS\Layout\FileLayout;

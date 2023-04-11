@@ -11,7 +11,7 @@
 /*
 GHSVS 2019-02-01
 Usage:
-<field name="LongDescription001" 
+<field name="LongDescription001"
 		type="plgSystemHyphenateGhsvs.longdescription" // Mandatory.
 		hiddenLabel="true" // Recommended.
 		additionalClass="optional irgendwas" // Optional-
@@ -19,13 +19,13 @@ Usage:
 		contentToggler="true" // Optional. Hide the Description plus a show/hide button.
 		contentTogglerLabel="WAHT_EVER_STRING" // Optional. Default PLG_HYPHENATEGHSVS_SHOW_HIDE_BUTTON
 		/>
-		
+
 Language string/descriptiontext can contain something like
 
 {INCLUDE-FILE:/plugins/system/hyphenateghsvs/LICENSE_Hyphenator.txt}
 
 Start with "/" if file is somewhere in the JoomlaROOT and not in /language/.
-Just file name 
+Just file name
 {INCLUDE-FILE:LICENSE_Hyphenator.txt}
 if file is in language/xy-XY/ folder.
 
@@ -39,10 +39,10 @@ to include a text file.addParams
 Language string/descriptiontext can contain something like
 {HEAD-LINE:Setting <code>Fallback Languages</code> <b>(Hyphenopoly)</b>:}
 Only 1 occurence is allowed.
-To create a headline. 
+To create a headline.
 */
 
-defined('JPATH_PLATFORM') or die;
+defined('_JEXEC') or die;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Form\FormField;
 #use Joomla\CMS\HTML\HTMLHelper;
